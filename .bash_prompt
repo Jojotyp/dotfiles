@@ -1,16 +1,15 @@
-source "${HOME}/.dotfiles/.shared_prompt"
+source "$(dirname $(readlink -f "$0"))/.shared_prompt"
 
-# PS1="\$(prompt_venv)" # virtual environment
-# PS1+="\[${bold}\]\n" # newline
-# PS1+="\[${userStyle}\]\u" # username
-# PS1+="\[${color_white}\] at "
-# PS1+="\[${hostStyle}\]\h" # host
-# PS1+="\[${color_white}\] in "
-# PS1+="\[${color_green}\]\W" # working directory
-# PS1+="\$(prompt_git)" # Git repository details
-# PS1+="\n"
-# PS1+="\[${color_white}\]\$ \[${reset_styles}\]" # `$` (and reset color)
-# export PS1
+
+# Prompts (source: https://wiki.archlinux.org/title/Bash/Prompt_customization)
+# PS0 is displayed after each command, before any output.
+# PS1 is the primary prompt which is displayed before each command, thus it is the one most people customize.
+# PS2 is the secondary prompt displayed when a command needs more input (e.g. a multi-line command).
+# PS3 is not very commonly used. It is the prompt displayed for Bash's select built-in which displays interactive menus.
+# Unlike the other prompts, it does not expand Bash escape sequences. Usually you would customize it in the script where
+# the select is used rather than in your .bashrc.
+# PS4 is also not commonly used. It is displayed when debugging bash scripts to indicate levels of indirection.
+# The first character is repeated to indicate deeper levels.
 
 PS1="\$(prompt_venv)"           # virtual environment
 PS1+="\[${color_green}\][\t] "	# time
@@ -23,5 +22,5 @@ PS1+="\[${color_white}\]$ "		# `$`
 PS1+="\[${reset_styles}\]"		# reset color for commands and cmd output
 export PS1
 
-PS2="\[${color_yellow}\]→ \[${reset}\]"
+PS2="\[${color_yellow}\]→ \[${reset_styles}\]"
 export PS2
