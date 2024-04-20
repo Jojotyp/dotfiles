@@ -1,5 +1,4 @@
-source "$(dirname $(readlink -f "$0"))/.shared_prompt"
-
+source "${HOME}/.dotfiles/.shared_prompt"
 
 # Prompts (source: https://wiki.archlinux.org/title/Bash/Prompt_customization)
 # PS0 is displayed after each command, before any output.

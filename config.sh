@@ -3,19 +3,22 @@
 # Configure the .env to contain necessary variables for scripts
 ############################
 
-dotfiles_dir=$(dirname $(readlink -f "$0"))
+DOTFILES_DIR="${HOME}/.dotfiles"
+env_file="$DOTFILES_DIR/.env"
 
-env_file="$dotfiles_dir/.env"
+echo -e "\nCreate .env file through config.sh\n----------------------------------"
 
 if [ ! -f "$env_file" ]; then
     echo "Creating .env skeleton file..."
 
-    echo "DOTFILES_DIR=${dotfiles_dir}" > "$env_file"
-    echo "WINDOWS_USER=YOUR_USERNAME" >> "$env_file"
+    read -p "Please enter your Windows Username: " user_input
+    echo "You entered: \"$user_input\""
 
-    echo ".env file has been created with default values. Please update it accordingly."
+    echo "WINDOWS_USER=$user_input" > "$env_file"
+
+    echo ".env file has been created."
 else
     echo ".env file already exists."
 fi
 
-# TODO: optinally set variables here by QA
+echo -e "Finished config.sh\n"

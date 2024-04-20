@@ -1,29 +1,30 @@
 #!/usr/bin/bash
 ############################
-# This script creates symlinks from the home directory to any desired .dotfiles in $HOME/.dotfiles
+# This script creates settings for a specific application.
 ############################
 
-source "$(dirname $(readlink -f "$0"))/../.env"
+DOTFILES_DIR="${HOME}/.dotfiles"
+source "${DOTFILES_DIR}/.env"
 
-echo $DOTFILES_DIR
+application_name="vscode"
 
-# # Check if we are on WSL by looking for the presence of "microsoft" in the kernel name
-# if grep -qi microsoft /proc/version; then
-#     echo "Running on WSL2. Proceeding with copy operation."
+echo "settings/${application_name}.sh:"
 
-#     # Ensure the destination directory exists
-#     mkdir -p "$DOTFILES_DIR"
+# Check if we are on WSL by looking for the presence of "microsoft" in the kernel name
+if grep -qi microsoft /proc/version; then
+    echo "Running on WSL2. Proceeding with copy operation."
 
-#     # Define the source paths on your Windows filesystem.
-#     windows_user="Fabi"
-#     settings_src="/mnt/c/Users/$windows_user/AppData/Roaming/Code/User/settings.json"
-#     keybindings_src="/mnt/c/Users/$windows_user/AppData/Roaming/Code/User/keybindings.json"
+    mkdir -p "$DOTFILES_DIR/settings/${application_name}"
 
-#     # Copy the files to the destination directory
-#     cp "$settings_src" "$DOTFILES_DIR/settings/vscode/settings.json"
-#     cp "$keybindings_src" "$DOTFILES_DIR/settings/vscode/keybindings.json"
+    settings_src="/mnt/c/Users/$WINDOWS_USER/AppData/Roaming/Code/User/settings.json"
+    keybindings_src="/mnt/c/Users/$WINDOWS_USER/AppData/Roaming/Code/User/keybindings.json"
 
-#     echo "Copy operation completed."
-# else
-#     echo "Not running on WSL2. Script will exit."
-# fi
+    cp "$settings_src" "$DOTFILES_DIR/settings/${application_name}/settings.json"
+    cp "$keybindings_src" "$DOTFILES_DIR/settings/${application_name}/keybindings.json"
+
+    echo "Copy operation completed."
+else
+    echo "Not running on WSL2. Script will exit."
+fi
+
+echo ""

@@ -3,8 +3,11 @@
 # This script creates symlinks from the home directory to any desired .dotfiles in $HOME/.dotfiles
 ############################
 
-bash "$(dirname $(readlink -f "$0"))/config.sh"
-source "$(dirname $(readlink -f "$0"))/.env"
+DOTFILES_DIR="${HOME}/.dotfiles"
+bash "${DOTFILES_DIR}/config.sh"
+source "${DOTFILES_DIR}/.env"
+
+echo -e "\nStarting installation through install.sh\n----------------------------------------"
 
 # list of files/folders to symlink in ${homedir}
 files=(bash_aliases bash_logout bash_profile bash_prompt bashrc gitconfig)
@@ -19,6 +22,10 @@ for file in "${files[@]}"; do
     ln -sf "${DOTFILES_DIR}/.${file}" "${HOME}/.${file}"
 done
 
-# TODO: 
+# settings
+echo -e "\nGet settings of applications\n============================"
+
+bash ./settings/vscode.sh
+bash ./settings/windows_terminal.sh
 
 echo "Installation Complete!"
