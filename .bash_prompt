@@ -16,7 +16,7 @@ PS1+="\[${userStyle}\]\u"	    # username
 PS1+="\[${hostStyle}\]@\h:"	    # hostname
 PS1+="\[${color_orange}\]\w"	# current working dir
 PS1+="\$(prompt_git)"           # Git repository details
-PS1+="\n"				        # start on new line3
+PS1+="\n"				        # start on new line
 PS1+="\[${color_white}\]$ "		# `$`
 PS1+="\[${reset_styles}\]"		# reset color for commands and cmd output
 export PS1

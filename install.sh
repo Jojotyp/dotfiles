@@ -3,6 +3,20 @@
 # This script creates symlinks from the home directory to any desired .dotfiles in $HOME/.dotfiles
 ############################
 
+confirm() {
+    # call with a prompt string or use a default
+    read -r -p "${1:-Are you sure?} [y/N] " response
+    case "$response" in
+        [yY][eE][sS]|[yY]) 
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+
+
 DOTFILES_DIR="${HOME}/.dotfiles"
 bash "${DOTFILES_DIR}/config.sh"
 source "${DOTFILES_DIR}/.env"
@@ -24,8 +38,14 @@ done
 
 # settings
 echo -e "\nGet settings of applications\n============================"
+promptSettings="Are you sure that you want to get local settings of"
+settingsFetched="Settings were fetched successfully."
+settingsNotFetched="Settings were NOT fetched."
 
-bash ./settings/vscode.sh
-bash ./settings/windows_terminal.sh
+promptSettingsVsCode=""$promptSettings" VS Code?"
+promptSettingsWindowsTerminal=""$promptSettings" Windows Terminal?"
+
+confirm "$promptSettingsVsCode" && bash ./settings/vscode.sh
+confirm "$promptSettingsWindowsTerminal" && bash ./settings/windows_terminal.sh
 
 echo "Installation Complete!"

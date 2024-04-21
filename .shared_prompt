@@ -34,7 +34,7 @@ prompt_venv() {
     if [[ -n "$VIRTUAL_ENV" ]]; then
         # Extract the last directory name in the $VIRTUAL_ENV path
         venv_name=$(basename "$VIRTUAL_ENV")
-        printf "\n%b(%s) \n" "${color_steel_blue}" "${venv_name}"
+        printf "%b(%s) \n" "${color_steel_blue}" "${venv_name}"
     fi
 }
 
