@@ -1,3 +1,5 @@
 [user]
 	name = Jojotyp
 	email = 78567753+Jojotyp@users.noreply.github.com
+[core]
+	autocrlf = input
