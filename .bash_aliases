@@ -1,8 +1,15 @@
 # .bash_aliases
 
 # Command configurations #
-## file and dir listing
-alias ls='ls --color=auto' # colorize by LS_COLORS in .shared_prompt
+# file and dir listing
+# colorize by LS_COLORS in .shared_prompt
+OS=$(uname)
+if [ "$OS" == "Darwin" ]; then
+    alias ls='ls -G'
+else
+    alias ls='ls --color=auto'
+fi
+# alias ls='ls --color=auto' # colorize by LS_COLORS in .shared_prompt
 alias l='ls -CF'
 alias la='ls -a'
 alias ll='ls -alF'
