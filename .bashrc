@@ -9,6 +9,8 @@ for file in ~/.{bash_aliases,bash_prompt}; do
 done;
 unset file;
 
+# set locale
+export LANG=en_US.utf8
 
 # append to the history file, don't overwrite it
 shopt -s histappend
