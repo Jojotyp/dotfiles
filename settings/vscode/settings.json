@@ -48,7 +48,8 @@
     "files.associations": {
         ".bash_prompt": "shellscript",
         ".shared_prompt": "shellscript",
-        ".bashrc_old": "shellscript"
+        ".bashrc_old": "shellscript",
+        ".gitconfig_work": "git"
     },
     
     // PYTHON ##########################################################################################################
