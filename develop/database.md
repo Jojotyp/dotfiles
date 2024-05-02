@@ -35,13 +35,14 @@ show users
 
 set privileges
 all db:
-```GRANT ALL PRIVILEGES ON *.* TO 'USER_NAME'@localhost IDENTIFIED BY 'PASSWORD'```
+```GRANT ALL PRIVILEGES ON *.* TO 'USER_NAME'@localhost IDENTIFIED BY 'PASSWORD';```
 
 specific db:
-```GRANT ALL PRIVILEGES ON 'DB_NAME'.* TO 'USER_NAME'@localhost```
+```GRANT ALL PRIVILEGES ON 'DB_NAME'.* TO 'USER_NAME'@localhost;```
 
 then: ```FLUSH PRIVILEGES;```
 
 show privileges
 ```SHOW GRANTS FOR 'USER_NAME'@localhost;```
+
 
