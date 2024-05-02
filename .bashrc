@@ -34,7 +34,17 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# PhpStorm
+# Individual programs or binaries
+## Imagick
+if [ -d "/opt/ImageMagick" ]; then
+    export MAGICK_HOME="/opt/ImageMagick"
+    export PATH="$MAGICK_HOME/bin:$PATH"
+#    PATH="$PATH:/opt/ImageMagick"
+    LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$MAGICK_HOME/lib"
+    export LD_LIBRARY_PATH
+fi
+
+## PhpStorm
 if [ -d "/opt/PhpStorm" ]; then
     PATH="$PATH:/opt/PhpStorm/bin"
 fi
