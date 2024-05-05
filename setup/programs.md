@@ -6,8 +6,9 @@
 ## Browser extensions
 ### Firefox
 - Bitwarden
-- uBlock Origin
+- NordVPN
 - Return YouTube Dislike
+- uBlock Origin
 
 ## Entertainment
 - Spotify
