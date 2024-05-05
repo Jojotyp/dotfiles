@@ -1,5 +1,6 @@
 # List of packages in use
 ## General
+- neofetch
 - xclip
 
 ## Web-Server
