@@ -33,6 +33,7 @@ sudo nano /etc/hosts
 ```
 
 set ownership of folder to www-data
+GENERALLY: advisable to put web application projects into /var/www/...
 ```sudo chown -R www-data:www-data /path/to/project```
 
 ```sudo systemctl restart apache2```
