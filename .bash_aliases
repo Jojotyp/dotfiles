@@ -14,6 +14,10 @@ alias l='ls -CF'
 alias la='ls -a'
 alias ll='ls -alF'
 
+# history grep of commands
+## show commands entered before from .bash_history (usage: hgrep COMMAND)
+alias hgrep='history | grep'
+
 # xclip
 ## copy command output to clipboard (usage: $COMMAND | clip)
 alias clip='xclip -selection clipboard'

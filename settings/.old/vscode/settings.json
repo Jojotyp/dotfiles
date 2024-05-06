@@ -1,0 +1,35 @@
+{
+    // set PYTHONPATH to project root for imports
+    "terminal.integrated.env.osx": {
+        "PYTHONPATH": "${workspaceFolder}/."
+    },
+    "terminal.integrated.env.linux": {
+        "PYTHONPATH": "${workspaceFolder}/."
+    },
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH": "${workspaceFolder}/."
+    },
+
+    "files.autoSave": "afterDelay",
+
+    // "python.analysis.typeCheckingMode": "off",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    "editor.guides.highlightActiveBracketPair": true,
+
+    "workbench.colorCustomizations": {
+        "editor.lineHighlightBorder": "#383838",
+        "editorBracketHighlight.foreground1": "#e0e0e0",
+        "editorBracketHighlight.foreground2": "#00ac2b",
+        "editorBracketHighlight.foreground3": "#ca0000",
+        "editorBracketHighlight.foreground4": "#e0bf00",
+        "editorBracketHighlight.foreground5": "#0052cc",
+        "editorBracketHighlight.foreground6": "#5c00d4",
+        "editorBracketHighlight.unexpectedBracket.foreground": "#ff5555"
+    },
+    "editor.guides.bracketPairsHorizontal": false,
+    "python.defaultInterpreterPath": "./lvenv/bin/python3.10",
+    "editor.rulers": [
+        120
+    ]
+}

@@ -19,6 +19,9 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=10000
 
+# ignore hgrep alias for .bash_history
+export HISTIGNORE="$HISTIGNORE:hgrep*"
+
 # PATH variables
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
