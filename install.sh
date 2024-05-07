@@ -3,9 +3,10 @@
 # This script creates symlinks from the home directory to any desired .dotfiles in $HOME/.dotfiles
 ############################
 
-DOTFILES_DIR="${HOME}/.dotfiles"
-bash "${DOTFILES_DIR}/config.sh"
-source "${DOTFILES_DIR}/.env"
+# project has to be "~/.dotfiles" (/home/USER/.dotfiles)
+bash "${HOME}/.dotfiles/config.sh"
+source "${HOME}/.dotfiles/.env" # from here on out we can reference this project by "DOTFILES_DIR"
+source "${DOTFILES_DIR}/bash_utils.sh"
 
 echo -e "\nStarting installation through install.sh\n========================================"
 
@@ -35,5 +36,16 @@ else
     cp "${DOTFILES_DIR}/.gitconfig" "${HOME}/.gitconfig"
 fi
 
+# create repository folders
+read -r -p "Do you want to create repository folders (i.e. ~/Programming/Projects) [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+    echo "Creating repository folders (if not already existing):"
+    mkdir -pv "${HOME}/Programming/Projects"
+    mkdir -pv "${HOME}/Programming/Projects/private"
+    mkdir -pv "${HOME}/Programming/Projects/work"
+else
+    echo "No repository folders created."
+fi
 
 echo -e "\nInstallation Complete!"

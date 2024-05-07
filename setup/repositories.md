@@ -22,17 +22,17 @@ rsa algorithm
 
 enter password if wanted
 
-### repos
-#### base
+### Repositories
+#### Base
 .dotfiles
 ```git clone git@github.com:Jojotyp/.dotfiles.git```
 
 hints
-```git clone git@github.com:Jojotyp/hints.git```
+```git clone git@github.com:Jojotyp/hints.git ~/Programming```
 
 python-utils
-```git clone git@github.com:Jojotyp/python-utils.git```
+```git clone git@github.com:Jojotyp/python-utils.git ~/Programming/own_packages```
 
-#### projects
+#### Projects
 mtg-lich
-```git@github.com:Jojotyp/mtg-lich.git```
+```git clone git@github.com:Jojotyp/mtg-lich.git ~/Programming/Projects/private```

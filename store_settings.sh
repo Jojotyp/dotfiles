@@ -3,19 +3,8 @@
 # This script stores settings of applications to ${HOME}/.dotfiles/settings/
 ############################
 
-confirm() {
-    # call with a prompt string or use a default
-    read -r -p "${1:-Are you sure?} [y/N] " response
-    case "$response" in
-        [yY][eE][sS]|[yY]) 
-            true
-            ;;
-        *)
-            false
-            ;;
-    esac
-}
-
+source "${HOME}/.dotfiles/.env"
+source "${DOTFILES_DIR}/bash_utils.sh"
 
 # settings
 echo -e "\nSave local settings of applications\n==================================="

@@ -3,8 +3,7 @@
 # This script creates settings for a specific application.
 ############################
 
-DOTFILES_DIR="${HOME}/.dotfiles"
-source "${DOTFILES_DIR}/.env"
+source "${HOME}/.dotenv/.env"
 
 application_name="windows_terminal"
 
