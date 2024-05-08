@@ -35,6 +35,16 @@ HISTFILESIZE=10000
 # ignore hgrep alias for .bash_history
 export HISTIGNORE="$HISTIGNORE:hgrep*"
 
+
+# Set Flatpak application paths to show them in desktop environment
+if [ -z "${XDG_DATA_DIRS-}" ]; then
+    XDG_DATA_DIRS="/usr/local/share:/usr/share"
+fi
+XDG_DATA_DIRS="/var/lib/flatpak/exports/share:${XDG_DATA_DIRS}"
+XDG_DATA_DIRS="${HOME}/.local/share/flatpak/exports/share:${XDG_DATA_DIRS}"
+export XDG_DATA_DIRS
+
+
 # PATH variables
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
