@@ -30,6 +30,9 @@ enter password if wanted
 hints
 ```git clone git@github.com:Jojotyp/hints.git ~/Programming```
 
+scripts
+```git clone git@github.com:Jojotyp/scripts.git ~/Programming```
+
 python-utils
 ```git clone git@github.com:Jojotyp/python-utils.git ~/Programming/own_packages```
 

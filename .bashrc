@@ -10,7 +10,7 @@ done;
 unset file;
 
 # set locale
-export LANG="en_US.utf8"
+export LANG=en_US.utf8
 export LC_CTYPE="en_US.utf8"
 export LC_NUMERIC="en_US.utf8"
 export LC_TIME="de_DE.utf8"
@@ -23,7 +23,7 @@ export LC_ADDRESS="en_US.utf8"
 export LC_TELEPHONE="en_US.utf8"
 export LC_MEASUREMENT="de_DE.utf8"
 export LC_IDENTIFICATION="en_US.utf8"
-export LC_ALL=
+export LC_ALL=en_US.utf8
 
 # append to the history file, don't overwrite it
 shopt -s histappend
