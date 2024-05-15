@@ -37,15 +37,16 @@ else
 fi
 
 # create repository folders
-read -r -p "Do you want to create repository folders (i.e. ~/Programming/Projects) [y/N] " response
+read -r -p "Do you want to create 'Programming' folders (i.e. ~/Programming/Projects) [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
     echo "Creating repository folders (if not already existing):"
+    mkdir -pv "${HOME}/Programming/own_packages"
     mkdir -pv "${HOME}/Programming/Projects"
     mkdir -pv "${HOME}/Programming/Projects/private"
     mkdir -pv "${HOME}/Programming/Projects/work"
 else
-    echo "No repository folders created."
+    echo "Will not create any 'Programming' folders."
 fi
 
 echo -e "\nInstallation Complete!"
