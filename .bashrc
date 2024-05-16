@@ -61,6 +61,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Individual programs or binaries
+## Android Studio
+if [ -d "/opt/android-studio/bin" ]; then
+    PATH="/opt/android-studio/bin:$PATH"
+fi
+
 ## Imagick
 if [ -d "/opt/ImageMagick" ]; then
     export MAGICK_HOME="/opt/ImageMagick"
@@ -72,5 +77,5 @@ fi
 
 ## PhpStorm
 if [ -d "/opt/PhpStorm" ]; then
-    PATH="$PATH:/opt/PhpStorm/bin"
+    PATH="/opt/PhpStorm/bin:$PATH"
 fi
