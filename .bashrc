@@ -47,20 +47,21 @@ export XDG_DATA_DIRS
 
 # PATH variables
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
+if [ -d "$HOME/bin" ]; then
     PATH="$HOME/bin:$PATH"
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
+if [ -d "$HOME/.local/bin" ]; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Individual programs or binaries
+# Individual programs, binaries or configs
 ## Android Studio
 if [ -d "/opt/android-studio/bin" ]; then
     PATH="/opt/android-studio/bin:$PATH"
@@ -78,4 +79,9 @@ fi
 ## PhpStorm
 if [ -d "/opt/PhpStorm" ]; then
     PATH="/opt/PhpStorm/bin:$PATH"
+fi
+
+## Toolbox
+if [ -d "$HOME/.local/share/JetBrains/Toolbox/scripts" ]; then
+    PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 fi
