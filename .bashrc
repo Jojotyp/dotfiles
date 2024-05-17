@@ -45,7 +45,7 @@ XDG_DATA_DIRS="${HOME}/.local/share/flatpak/exports/share:${XDG_DATA_DIRS}"
 export XDG_DATA_DIRS
 
 
-# PATH variables
+# PATH variables #
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
     PATH="$HOME/bin:$PATH"
@@ -56,16 +56,25 @@ if [ -d "$HOME/.local/bin" ]; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # Individual programs, binaries or configs
 ## Android Studio
 if [ -d "/opt/android-studio/bin" ]; then
     PATH="/opt/android-studio/bin:$PATH"
 fi
+
+## Android platform-tools
+if [ -d "$HOME/Android/Sdk" ]; then
+    export ANDROID_HOME="$HOME/Android/Sdk"
+    # PATH="$PATH:$ANDROID_HOME/cmdline-tools/bin"
+    # PATH="$PATH:$ANDROID_HOME/platform-tools"
+fi
+
+# ## Android platform-tools
+# if [ -d "/usr/lib/android-sdk/cmdline-tools" ] && [ -d "/usr/lib/android-sdk/platform-tools" ]; then
+#     export ANDROID_HOME="/usr/lib/android-sdk"
+#     PATH="$PATH:$ANDROID_HOME/cmdline-tools/bin"
+#     PATH="$PATH:$ANDROID_HOME/platform-tools"
+# fi
 
 ## Imagick
 if [ -d "/opt/ImageMagick" ]; then
@@ -75,6 +84,18 @@ if [ -d "/opt/ImageMagick" ]; then
     LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$MAGICK_HOME/lib"
     export LD_LIBRARY_PATH
 fi
+
+# jdk (Java)
+if [ -d "/usr/lib/jvm" ]; then
+    # JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::") # dynamically determine path to jdk
+    export JAVA_HOME=$(dirname $(dirname $(readlink -f /usr/bin/java))) # dynamically determine path to jdk
+    PATH="${JAVA_HOME}/bin:$PATH" # something like: /usr/lib/jvm/jdk-[VERSION]-oracle-x64/bin
+fi
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ## PhpStorm
 if [ -d "/opt/PhpStorm" ]; then

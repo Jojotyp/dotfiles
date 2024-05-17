@@ -15,6 +15,9 @@
 ## IDE/text editors
 - Visual Studio Code
 - any IntelliJ IDE
+    - IntelliJ IDEA
+    - PhpStorm
+    - Pycharm
 
 ## Browser
 - Firefox
