@@ -65,8 +65,12 @@ fi
 ## Android platform-tools
 if [ -d "$HOME/Android/Sdk" ]; then
     export ANDROID_HOME="$HOME/Android/Sdk"
+    # export ANDROID_SDK_ROOT="$ANDROID_HOME/Sdk"
     # PATH="$PATH:$ANDROID_HOME/cmdline-tools/bin"
-    # PATH="$PATH:$ANDROID_HOME/platform-tools"
+    PATH="$PATH:$ANDROID_HOME/emulator"
+    PATH="$PATH:$ANDROID_HOME/platform-tools"
+    PATH="$PATH:$ANDROID_HOME/tools"
+    PATH="$PATH:$ANDROID_HOME/tools/bin"
 fi
 
 # ## Android platform-tools
