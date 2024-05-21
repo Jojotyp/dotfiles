@@ -65,12 +65,17 @@ fi
 ## Android platform-tools
 if [ -d "$HOME/Android/Sdk" ]; then
     export ANDROID_HOME="$HOME/Android/Sdk"
-    # export ANDROID_SDK_ROOT="$ANDROID_HOME/Sdk"
-    # PATH="$PATH:$ANDROID_HOME/cmdline-tools/bin"
+    PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
     PATH="$PATH:$ANDROID_HOME/emulator"
     PATH="$PATH:$ANDROID_HOME/platform-tools"
     PATH="$PATH:$ANDROID_HOME/tools"
     PATH="$PATH:$ANDROID_HOME/tools/bin"
+
+    export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+    # PATH="$PATH:$ANDROID_SDK_ROOT/emulator"
+    # PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
+    # PATH="$PATH:$ANDROID_SDK_ROOT/tools"
+    # PATH="$PATH:$ANDROID_SDK_ROOT/tools/bin"
 fi
 
 # ## Android platform-tools
@@ -79,6 +84,11 @@ fi
 #     PATH="$PATH:$ANDROID_HOME/cmdline-tools/bin"
 #     PATH="$PATH:$ANDROID_HOME/platform-tools"
 # fi
+
+# IntelliJ IDEA
+if [ -d "$HOME/.local/share/applications" ]; then
+    PATH="$HOME/.local/share/applications:$PATH"
+fi
 
 ## Imagick
 if [ -d "/opt/ImageMagick" ]; then
@@ -89,14 +99,14 @@ if [ -d "/opt/ImageMagick" ]; then
     export LD_LIBRARY_PATH
 fi
 
-# jdk (Java)
+## jdk (Java)
 if [ -d "/usr/lib/jvm" ]; then
     # JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::") # dynamically determine path to jdk
     export JAVA_HOME=$(dirname $(dirname $(readlink -f /usr/bin/java))) # dynamically determine path to jdk
     PATH="${JAVA_HOME}/bin:$PATH" # something like: /usr/lib/jvm/jdk-[VERSION]-oracle-x64/bin
 fi
 
-# nvm
+## nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
