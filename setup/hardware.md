@@ -7,4 +7,4 @@
 - related software:
     - ```install cheese```
     - ```install vlc```
-	- start instance: ```vlc v4l2:///dev/video[N]```
+	    - start instance: ```vlc v4l2:///dev/video[N]```

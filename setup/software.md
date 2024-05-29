@@ -33,7 +33,9 @@
 - Thunderbird
 
 ## Linux
+- Cheese (webcam)
 - Distrobox
+- VLC (webcam)
 
 ## Entertainment
 - Spotify
