@@ -36,6 +36,7 @@ alias c='cd /mnt/c/'
 alias d='cd /mnt/d/'
 
 # common dirs
+alias dotfiles="cd $HOME/.dotfiles"
 alias hints="cd $HOME/Programming/hints"
 alias Projects="cd $HOME/Programming/Projects"
 alias work="cd $HOME/Programming/Projects/work"
