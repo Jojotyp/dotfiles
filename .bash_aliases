@@ -40,7 +40,7 @@ alias dotfiles="cd $HOME/.dotfiles"
 alias hints="cd $HOME/Programming/hints"
 alias Projects="cd $HOME/Programming/Projects"
 alias work="cd $HOME/Programming/Projects/work"
-alias private="$HOME/Programming/Projects/private"
+alias private="cd $HOME/Programming/Projects/private"
 
 # GIT SSH key prompt session store PW
 alias git_ssh='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519'
