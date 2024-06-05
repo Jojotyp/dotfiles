@@ -68,8 +68,8 @@ if [ -d "$HOME/Android/Sdk" ]; then
     PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
     PATH="$PATH:$ANDROID_HOME/emulator"
     PATH="$PATH:$ANDROID_HOME/platform-tools"
-    PATH="$PATH:$ANDROID_HOME/tools"
-    PATH="$PATH:$ANDROID_HOME/tools/bin"
+    # PATH="$PATH:$ANDROID_HOME/tools"
+    # PATH="$PATH:$ANDROID_HOME/tools/bin"
 
     export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
     # PATH="$PATH:$ANDROID_SDK_ROOT/emulator"
@@ -101,7 +101,6 @@ fi
 
 ## jdk (Java)
 if [ -d "/usr/lib/jvm" ]; then
-    # JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::") # dynamically determine path to jdk
     export JAVA_HOME=$(dirname $(dirname $(readlink -f /usr/bin/java))) # dynamically determine path to jdk
     PATH="${JAVA_HOME}/bin:$PATH" # something like: /usr/lib/jvm/jdk-[VERSION]-oracle-x64/bin
 fi
