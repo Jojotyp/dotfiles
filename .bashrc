@@ -68,14 +68,8 @@ if [ -d "$HOME/Android/Sdk" ]; then
     PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
     PATH="$PATH:$ANDROID_HOME/emulator"
     PATH="$PATH:$ANDROID_HOME/platform-tools"
-    # PATH="$PATH:$ANDROID_HOME/tools"
-    # PATH="$PATH:$ANDROID_HOME/tools/bin"
 
     export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
-    # PATH="$PATH:$ANDROID_SDK_ROOT/emulator"
-    # PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
-    # PATH="$PATH:$ANDROID_SDK_ROOT/tools"
-    # PATH="$PATH:$ANDROID_SDK_ROOT/tools/bin"
 fi
 
 # ## Android platform-tools
@@ -94,7 +88,6 @@ fi
 if [ -d "/opt/ImageMagick" ]; then
     export MAGICK_HOME="/opt/ImageMagick"
     export PATH="$MAGICK_HOME/bin:$PATH"
-#    PATH="$PATH:/opt/ImageMagick"
     LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$MAGICK_HOME/lib"
     export LD_LIBRARY_PATH
 fi
