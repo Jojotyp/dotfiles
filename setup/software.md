@@ -26,6 +26,7 @@
 ### Extensions
 - Bitwarden
 - NordVPN
+- React Developer Tools
 - Return YouTube Dislike
 - uBlock Origin
 
