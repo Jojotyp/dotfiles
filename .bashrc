@@ -116,4 +116,7 @@ if [ -d "$HOME/.local/share/JetBrains/Toolbox/scripts" ]; then
     PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 fi
 
-. "$HOME/.cargo/env"
+## Cargo (Rust)
+if [ -d "$HOME/.cargo/env" ]; then 
+    . "$HOME/.cargo/env"
+fi
