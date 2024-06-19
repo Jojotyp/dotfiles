@@ -103,6 +103,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+## OpenSSL
+export OPENSSL_ROOT_DIR="/usr/"
+
 ## PhpStorm
 if [ -d "/opt/PhpStorm" ]; then
     PATH="/opt/PhpStorm/bin:$PATH"
@@ -112,3 +115,5 @@ fi
 if [ -d "$HOME/.local/share/JetBrains/Toolbox/scripts" ]; then
     PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 fi
+
+. "$HOME/.cargo/env"

@@ -1,7 +1,8 @@
 # List of packages in use
 ## General
-- neofetch
-- xclip
+- lshw (list hardware settings)
+- neofetch (list system settings)
+- xclip (copy to clipboard)
 
 ## Web-Server
 ### Apache
