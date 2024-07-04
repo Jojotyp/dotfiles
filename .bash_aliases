@@ -5,37 +5,38 @@
 # colorize by LS_COLORS in .shared_prompt
 OS=$(uname)
 if [ "$OS" == "Darwin" ]; then
-    alias ls='ls -G'
+    alias ls="ls -G"
 else
-    alias ls='ls --color=auto -v' # colored; sorted: dotfiles -> normal files
+    alias ls="ls --color=auto -v" # colored; sorted: dotfiles -> normal files
 fi
 # alias ls='ls --color=auto' # colorize by LS_COLORS in .shared_prompt
-alias l='ls -CF'
-alias la='ls -a'
-alias ll='ls -alF'
+alias l="ls -CF"
+alias la="ls -a"
+alias ll="ls -alF"
 
 # history grep of commands
 ## show commands entered before from .bash_history (usage: hgrep COMMAND)
-alias hgrep='history | grep'
+alias hgrep="history | grep"
+
+# upgradable
+alias upgradable="apt list --upgradable"
 
 # xclip
 ## copy command output to clipboard (usage: $COMMAND | clip)
-alias clip='xclip -selection clipboard'
+alias clip="xclip -selection clipboard"
 
 
 # DIRs #
 ## move up dirs
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
-
-## fast mounting
-alias c='cd /mnt/c/'
-alias d='cd /mnt/d/'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
 
 # common dirs
+alias Downloads="cd $HOME/Downloads"
+
 alias dotfiles="cd $HOME/.dotfiles"
 alias hints="cd $HOME/Programming/hints"
 alias proj="cd $HOME/Programming/Projects"
