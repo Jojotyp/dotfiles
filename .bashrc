@@ -46,28 +46,38 @@ export XDG_DATA_DIRS
 
 
 # PATH variables #
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ]; then
-    PATH="$HOME/bin:$PATH"
+# include system binaries for user
+if [ -d "/sbin" ]; then
+    export PATH="/sbin:$PATH"
 fi
 
-# set PATH so it includes user's private bin if it exists
+# include system binaries for user
+if [ -d "/usr/sbin" ]; then
+    export PATH="/usr/sbin:$PATH"
+fi
+
+# user's private bin if it exists
+if [ -d "$HOME/bin" ]; then
+    export PATH="$HOME/bin:$PATH"
+fi
+
+# user's private bin if it exists
 if [ -d "$HOME/.local/bin" ]; then
-    PATH="$HOME/.local/bin:$PATH"
+    export PATH="$HOME/.local/bin:$PATH"
 fi
 
 # Individual programs, binaries or configs
 ## Android Studio
 if [ -d "/opt/android-studio/bin" ]; then
-    PATH="/opt/android-studio/bin:$PATH"
+    export PATH="/opt/android-studio/bin:$PATH"
 fi
 
 ## Android platform-tools
 if [ -d "$HOME/Android/Sdk" ]; then
     export ANDROID_HOME="$HOME/Android/Sdk"
-    PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
-    PATH="$PATH:$ANDROID_HOME/emulator"
-    PATH="$PATH:$ANDROID_HOME/platform-tools"
+    export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+    export PATH="$PATH:$ANDROID_HOME/emulator"
+    export PATH="$PATH:$ANDROID_HOME/platform-tools"
 
     export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 fi
@@ -75,13 +85,13 @@ fi
 # ## Android platform-tools
 # if [ -d "/usr/lib/android-sdk/cmdline-tools" ] && [ -d "/usr/lib/android-sdk/platform-tools" ]; then
 #     export ANDROID_HOME="/usr/lib/android-sdk"
-#     PATH="$PATH:$ANDROID_HOME/cmdline-tools/bin"
-#     PATH="$PATH:$ANDROID_HOME/platform-tools"
+#     export PATH="$PATH:$ANDROID_HOME/cmdline-tools/bin"
+#     export PATH="$PATH:$ANDROID_HOME/platform-tools"
 # fi
 
 # IntelliJ IDEA
 if [ -d "$HOME/.local/share/applications" ]; then
-    PATH="$HOME/.local/share/applications:$PATH"
+    export PATH="$HOME/.local/share/applications:$PATH"
 fi
 
 ## Imagick
@@ -95,7 +105,7 @@ fi
 ## jdk (Java)
 if [ -d "/usr/lib/jvm" ]; then
     export JAVA_HOME=$(dirname $(dirname $(readlink -f /usr/bin/java))) # dynamically determine path to jdk
-    PATH="${JAVA_HOME}/bin:$PATH" # something like: /usr/lib/jvm/jdk-[VERSION]-oracle-x64/bin
+    export PATH="${JAVA_HOME}/bin:$PATH" # something like: /usr/lib/jvm/jdk-[VERSION]-oracle-x64/bin
 fi
 
 ## nvm
@@ -108,12 +118,12 @@ export OPENSSL_ROOT_DIR="/usr/"
 
 ## PhpStorm
 if [ -d "/opt/PhpStorm" ]; then
-    PATH="/opt/PhpStorm/bin:$PATH"
+    export PATH="/opt/PhpStorm/bin:$PATH"
 fi
 
 ## Toolbox
 if [ -d "$HOME/.local/share/JetBrains/Toolbox/scripts" ]; then
-    PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
+    export ATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 fi
 
 ## Cargo (Rust)
