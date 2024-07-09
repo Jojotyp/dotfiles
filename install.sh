@@ -11,7 +11,7 @@ source "${DOTFILES_DIR}/bash_utils.sh"
 echo -e "\nStarting installation through install.sh\n========================================"
 
 # list of files/folders to symlink in ${homedir}
-files=(bash_aliases bash_logout bash_profile bash_prompt bashrc)
+files=(bash_aliases bash_logout bash_profile bash_prompt bashrc nanorc)
 
 # change to the .dotfiles directory
 echo "Changing to the ${DOTFILES_DIR} directory"

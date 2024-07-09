@@ -13,6 +13,7 @@ source "${HOME}/.dotfiles/.shared_prompt"
 PS1="\$(prompt_venv)"           # virtual environment
 PS1+="\[${color_green}\][\t] "	# time
 PS1+="\[${userStyle}\]\u"	    # username
+PS1+="\[${reset_styles}\]"	    # reset bold
 PS1+="\[${hostStyle}\]@\h:"	    # hostname
 PS1+="\[${color_orange}\]\w"	# current working dir
 PS1+="\$(prompt_git)"           # Git repository details
