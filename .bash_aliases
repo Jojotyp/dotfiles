@@ -39,6 +39,7 @@ alias Documents="cd $HOME/Documents"
 alias Downloads="cd $HOME/Downloads"
 alias Music="cd $HOME/Music"
 alias Pictures="cd $HOME/Pictures"
+alias Programming="cd $HOME/Programming"
 alias Screenshots="cd $HOME/Screenshots"
 alias Videos="cd $HOME/Videos"
 
