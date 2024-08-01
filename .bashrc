@@ -3,6 +3,11 @@
 # If not running interactively, exit script
 [[ $- != *i* ]] && return
 
+# enable autocomplete for commands after sudo
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
 # Load .dotfiles:
 for file in ~/.{bash_aliases,bash_prompt,path_variables}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";

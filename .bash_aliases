@@ -1,6 +1,15 @@
 # .bash_aliases
 
 # Command configurations #
+# cat newline to prevent mash into next prompt
+cat_with_newline() {
+    command cat "$@"
+    echo
+}
+
+alias cat='cat_with_newline'
+
+
 # file and dir listing
 # colorize by LS_COLORS in .shared_prompt
 OS=$(uname)
@@ -22,7 +31,7 @@ alias hgrep="history | grep"
 alias upgradable="apt list --upgradable"
 
 # xclip
-## copy command output to clipboard (usage: $COMMAND | clip)
+## copy command output to  clipboard (usage: $COMMAND | clip)
 alias clip="xclip -selection clipboard"
 
 
