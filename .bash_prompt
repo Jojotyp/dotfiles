@@ -1,4 +1,4 @@
-source "${HOME}/.dotfiles/.shared_prompt"
+source "${HOME}/.dotfiles/load/shared_prompt.sh"
 
 # Prompts (source: https://wiki.archlinux.org/title/Bash/Prompt_customization)
 # PS0 is displayed after each command, before any output.

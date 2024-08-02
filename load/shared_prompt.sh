@@ -1,3 +1,8 @@
+#!/usr/bin/bash
+############################
+# This script provides git status info in prompt, venv info in prompt and colorization for .bashrc
+############################
+
 # Define the prompt_git function for git repository status
 prompt_git() {
     local git_status=''

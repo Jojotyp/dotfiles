@@ -11,14 +11,14 @@ alias cat='cat_with_newline'
 
 
 # file and dir listing
-# colorize by LS_COLORS in .shared_prompt
+# colorize by LS_COLORS in .dotfiles/load/shared_prompt.sh
 OS=$(uname)
 if [ "$OS" == "Darwin" ]; then
     alias ls="ls -G"
 else
     alias ls="ls --color=auto -v" # colored; sorted: dotfiles -> normal files
 fi
-# alias ls='ls --color=auto' # colorize by LS_COLORS in .shared_prompt
+# alias ls='ls --color=auto' # colorize by LS_COLORS in .dotfiles/load/shared_prompt.sh
 alias l="ls -CF"
 alias la="ls -a"
 alias ll="ls -alF"

@@ -1,3 +1,8 @@
+#!/usr/bin/bash
+############################
+# This script provides PATH variables for .bashrc
+############################
+
 # Set Flatpak application paths to show them in desktop environment
 if [ -z "${XDG_DATA_DIRS-}" ]; then
     XDG_DATA_DIRS="/usr/local/share:/usr/share"

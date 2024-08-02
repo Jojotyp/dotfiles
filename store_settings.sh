@@ -4,7 +4,7 @@
 ############################
 
 source "${HOME}/.dotfiles/.env"
-source "${DOTFILES_DIR}/bash_utils.sh"
+source "${DOTFILES_DIR}/load/bash_utils.sh"
 
 # settings
 echo -e "\nSave local settings of applications\n==================================="
