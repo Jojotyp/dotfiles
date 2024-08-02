@@ -1,3 +1,8 @@
+#!/usr/bin/bash
+############################
+# This script provides the prompt styling
+############################
+
 source "${HOME}/.dotfiles/load/shared_prompt.sh"
 
 # Prompts (source: https://wiki.archlinux.org/title/Bash/Prompt_customization)
@@ -18,7 +23,11 @@ PS1+="\[${hostStyle}\]@\h:"	    # hostname
 PS1+="\[${color_orange}\]\w"	# current working dir
 PS1+="\$(prompt_git)"           # Git repository details
 PS1+="\n"				        # start on new line
-PS1+="\[${color_white}\]$ "		# `$`
+if [ whoami == "root" ]; then
+    PS1+="\[${color_white}\]$ " # `#`
+else
+    PS1+="\[${color_white}\]$ "	# `$`
+fi
 PS1+="\[${reset_styles}\]"		# reset color for commands and cmd output
 export PS1
 
