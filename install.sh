@@ -20,11 +20,11 @@ cd "${DOTFILES_DIR}" || exit
 echo ""
 
 # optionally create backup dir of old .dotfiles
-if [ ! -d ${HOME}/.dotfiles_bak ]; then
+if [ ! -d "${HOME}/.dotfiles_bak" ]; then
     confirm_default_yes "Create a backup directory \"${HOME}/.dotfiles_bak\"?" && mkdir ${HOME}/.dotfiles_bak
 fi
 
-if [ -d ${HOME}/.dotfiles_bak ]; then
+if [ -d "${HOME}/.dotfiles_bak" ]; then
     timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
     confirm_default_yes \
         "Create a backup of old .dotfiles in directory \"${HOME}/.dotfiles_bak/${timestamp}\" and copy old files?" \
@@ -34,16 +34,16 @@ fi
 
 echo ""
 
-# create symlinks (will overwrite old .dotfiles)
+# create copies of old .dotfiles if we just created a new dir for this as ~/.dotfiles_bak
 for file in "${files[@]}"; do
-    # Check if the backup directory exists and the .dotfile is a regular file
+    # check if the backup directory exists and the .dotfile is a regular file
     if [[ -d "${HOME}/.dotfiles_bak/${timestamp}" && -f "${HOME}/.${file}" ]]; then
         echo "Copying old .dotfile \".${file}\" to \"${HOME}/.dotfiles_bak/${timestamp}/\""
         cp -L "${HOME}/.${file}" "${HOME}/.dotfiles_bak/${timestamp}/"
     fi
-    echo "Creating symlink to $file in home directory."
-    ln -sf "${DOTFILES_DIR}/.${file}" "${HOME}/.${file}"
 done
+
+echo ""
 
 # create symlinks (will overwrite old .dotfiles)
 for file in "${files[@]}"; do
@@ -63,6 +63,8 @@ else
     echo "Copying private .gitconfig."
     cp "${DOTFILES_DIR}/.gitconfig" "${HOME}/.gitconfig"
 fi
+
+echo ""
 
 # create repository folders
 read -r -p "Do you want to create \"Programming\" folders (i.e. ~/Programming/Projects) [y/N] " response

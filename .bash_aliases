@@ -7,7 +7,7 @@ cat_with_newline() {
     echo
 }
 
-alias cat='cat_with_newline'
+alias cat="cat_with_newline"
 
 
 # file and dir listing
@@ -18,7 +18,7 @@ if [ "$OS" == "Darwin" ]; then
 else
     alias ls="ls --color=auto -v" # colored; sorted: dotfiles -> normal files
 fi
-# alias ls='ls --color=auto' # colorize by LS_COLORS in .dotfiles/load/shared_prompt.sh
+# alias ls="ls --color=auto" # colorize by LS_COLORS in .dotfiles/load/shared_prompt.sh
 alias l="ls -CF"
 alias la="ls -a"
 alias ll="ls -alF"
@@ -54,6 +54,7 @@ alias Videos="cd $HOME/Videos"
 
 alias dotfiles="cd $HOME/.dotfiles"
 alias hints="cd $HOME/Programming/hints"
+alias me="cd $HOME/Documents/me"
 alias progr="cd $HOME/Programming"
 alias proj="cd $HOME/Programming/Projects"
 alias projv="cd /var/www/Projects"
@@ -73,3 +74,11 @@ alias s_lv="source lvenv/bin/activate"
 alias s_v="source venv/bin/activate"
 
 # Others #
+
+
+# root #
+if [ whoami == "root" ]; then
+    alias rm="rm -i"
+    alias cp="cp -i"
+    alias mv="mv -i"
+fi
