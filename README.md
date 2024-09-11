@@ -1,14 +1,14 @@
-# .dotfiles
+# dotfiles
 My dotfiles.
 
 ATTENTION:
-Repository folder has to be called ".dotfiles" to ensure that everything works as intended.
+Repository folder has to be called "dotfiles" to ensure that everything works as intended.
 
-## Load .dotfiles dir into a systems' home dir under ~/.dotfiles
-`git clone git@github.com:Jojotyp/.dotfiles.git ~/.dotfiles`
+## Load dotfiles dir into a systems' home dir under ~/dotfiles
+`git clone git@github.com:Jojotyp/dotfiles.git ~/dotfiles`
 
-Run `bash install.sh` in the terminal to overwrite existing .dotfiles in ~ for custom settings.
-This can create backups of old .dotfiles.
+Run `bash install.sh` in the terminal to overwrite existing dotfiles in ~ for custom settings.
+This can create backups of old dotfiles.
 
 ## Add a new .dotfile
 - create the .dotfile

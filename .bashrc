@@ -10,7 +10,7 @@ fi
 
 complete -cf sudo
 
-# Load .dotfiles:
+# Load dotfiles:
 for file in ~/.{bash_aliases,bash_prompt}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
@@ -29,7 +29,7 @@ export HISTIGNORE="$HISTIGNORE:hgrep*"
 
 
 # Load locale, PATH variables:
-for file in ~/.dotfiles/load/{locale_variables,path_variables}; do
+for file in ~/dotfiles/load/{locale_variables,path_variables}; do
     . $file.sh
 done;
 unset file;

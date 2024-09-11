@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 ############################
-# This script stores settings of applications to ${HOME}/.dotfiles/settings/
+# This script stores settings of applications to ${HOME}/dotfiles/settings/
 ############################
 
-source "${HOME}/.dotfiles/.env"
-source "${DOTFILES_DIR}/load/bash_utils.sh"
+DIR_DOTFILES="${HOME}/dotfiles"
+source "${DIR_DOTFILES}/load/bash_utils.sh"
 
 # settings
 echo -e "\nSave local settings of applications\n==================================="
