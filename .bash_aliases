@@ -55,11 +55,14 @@ alias Videos="cd $HOME/Videos"
 alias dotfiles="cd $HOME/.dotfiles"
 alias hints="cd $HOME/Programming/hints"
 alias me="cd $HOME/Documents/me"
+alias private="cd $HOME/Programming/Projects/private"
 alias progr="cd $HOME/Programming"
 alias proj="cd $HOME/Programming/Projects"
 alias projv="cd /var/www/Projects"
 alias work="cd $HOME/Programming/Projects/work"
-alias private="cd $HOME/Programming/Projects/private"
+alias work_customers="cd $HOME/Programming/Projects/work/customers"
+alias work_idea="cd $HOME/Programming/Projects/work/IdeaProjects"
+alias work_php="cd $HOME/Programming/Projects/work/PhpStormProjects"
 
 # GIT SSH key prompt session store PW
 alias git_ssh='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519'
