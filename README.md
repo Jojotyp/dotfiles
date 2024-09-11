@@ -10,8 +10,8 @@ Repository folder has to be called "dotfiles" to ensure that everything works as
 Run `bash install.sh` in the terminal to overwrite existing dotfiles in ~ for custom settings.
 This can create backups of old dotfiles.
 
-## Add a new .dotfile
-- create the .dotfile
+## Add a new dotfile
+- create the dotfile
 - add its name in install.sh
 
 ## hints repo for information on all aspects of development and on installing other projects

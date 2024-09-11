@@ -35,9 +35,9 @@ echo ""
 
 # create copies of old dotfiles if we just created a new dir for this as ~/dotfiles_bak
 for file in "${files[@]}"; do
-    # check if the backup directory exists and the .dotfile is a regular file
+    # check if the backup directory exists and the dotfile is a regular file
     if [[ -d "${HOME}/dotfiles_bak/${timestamp}" && -f "${HOME}/.${file}" ]]; then
-        echo "Copying old .dotfile \".${file}\" to \"${HOME}/dotfiles_bak/${timestamp}/\""
+        echo "Copying old dotfile \".${file}\" to \"${HOME}/dotfiles_bak/${timestamp}/\""
         cp -L "${HOME}/.${file}" "${HOME}/dotfiles_bak/${timestamp}/"
     fi
 done
