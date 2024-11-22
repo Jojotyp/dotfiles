@@ -17,4 +17,4 @@ export LC_ADDRESS="en_US.utf8"
 export LC_TELEPHONE="en_US.utf8"
 export LC_MEASUREMENT="de_DE.utf8"
 export LC_IDENTIFICATION="en_US.utf8"
-export LC_ALL=en_US.utf8
+# export LC_ALL=en_US.utf8
