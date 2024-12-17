@@ -22,6 +22,8 @@ fi
 alias l="ls -CF"
 alias la="ls -a"
 alias ll="ls -alF"
+alias llsize="ls -alF --sort=size"
+alias lldate="ls -alF --sort=time"
 
 # history grep of commands
 ## show commands entered before from .bash_history (usage: hgrep COMMAND)
