@@ -1,6 +1,7 @@
 # .bash_aliases
+### COMMAND CONFIGURATIONS ###
 
-# Command configurations #
+# TERMINAL OUTPUT #
 # cat newline to prevent mash into next prompt
 cat_with_newline() {
     command cat "$@"
@@ -9,6 +10,12 @@ cat_with_newline() {
 
 alias cat="cat_with_newline"
 
+# copy last command to clipboard // no alias bc of awk syntax
+copy_last_command() {
+    command fc -ln -1 | awk '{$1=$1}1' | clip
+}
+
+alias cplc="copy_last_command"
 
 # file and dir listing
 # colorize by LS_COLORS in dotfiles/load/shared_prompt.sh
@@ -76,7 +83,7 @@ alias work_php="cd $HOME/Programming/Projects/work/PhpStormProjects"
 alias git_ssh='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519'
 
 
-# Sourcing #
+# SOURCING #
 ## ~/.bashrc
 alias s_brc="source ~/.bashrc"
 
@@ -84,7 +91,8 @@ alias s_brc="source ~/.bashrc"
 alias s_lv="source lvenv/bin/activate"
 alias s_v="source venv/bin/activate"
 
-# Others #
+
+# OTHERS #
 
 
 # root #
