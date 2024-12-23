@@ -58,6 +58,7 @@ if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
     echo "Creating repository folders (if not already existing):"
     mkdir -pv "${HOME}/Programming/own_packages"
+    mkdir -pv "${HOME}/Programming/scripts"
     mkdir -pv "${HOME}/Programming/Projects"
     mkdir -pv "${HOME}/Programming/Projects/private"
     mkdir -pv "${HOME}/Programming/Projects/work"
