@@ -74,6 +74,8 @@ alias private="cd $HOME/Programming/Projects/private"
 alias progr="cd $HOME/Programming"
 alias proj="cd $HOME/Programming/Projects"
 alias projv="cd /var/www/Projects"
+alias scripts="cd $HOME/Programming/venvs"
+alias venvs="cd $HOME/Programming/scripts"
 alias work="cd $HOME/Programming/Projects/work"
 alias work_customers="cd $HOME/Programming/Projects/work/customers"
 alias work_idea="cd $HOME/Programming/Projects/work/IdeaProjects"
@@ -90,6 +92,7 @@ alias s_brc="source ~/.bashrc"
 ## Python venv activate
 alias s_lv="source lvenv/bin/activate"
 alias s_v="source venv/bin/activate"
+alias s_cv="source bin/activate" # activate in a current venv
 
 
 # OTHERS #
