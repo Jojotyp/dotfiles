@@ -23,6 +23,11 @@ if [ -d "/usr/sbin" ]; then
     export PATH="/usr/sbin:$PATH"
 fi
 
+# include system binaries for user
+if [ -d "/usr/local/lib" ]; then
+    export PATH="/usr/local/lib:$PATH"
+fi
+
 # user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
     export PATH="$HOME/bin:$PATH"
