@@ -37,6 +37,7 @@ alias lldate="ls -alF --sort=time"
 alias hgrep="history | grep"
 
 # upgradable
+alias uga="apt list --upgradable"
 alias upgradable="apt list --upgradable"
 
 # xclip
