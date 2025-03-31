@@ -36,6 +36,11 @@ alias lldate="ls -alF --sort=time"
 ## show commands entered before from .bash_history (usage: hgrep COMMAND)
 alias hgrep="history | grep"
 
+# python
+alias py3="python3"
+alias py3.12="python3.12"
+alias python="python3"
+
 # upgradable
 alias uga="apt list --upgradable"
 alias upgradable="apt list --upgradable"
