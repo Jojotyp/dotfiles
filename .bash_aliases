@@ -17,6 +17,13 @@ copy_last_command() {
 
 alias cplc="copy_last_command"
 
+curl_with_newline() {
+    command curl "$@"
+    echo
+}
+
+alias curl="curl_with_newline"
+
 # file and dir listing
 # colorize by LS_COLORS in dotfiles/load/shared_prompt.sh
 OS=$(uname)
