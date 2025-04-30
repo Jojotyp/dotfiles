@@ -79,6 +79,7 @@ alias Programming="cd $HOME/Programming"
 alias Screenshots="cd $HOME/Screenshots"
 alias Videos="cd $HOME/Videos"
 
+alias customers="cd $HOME/Programming/Projects/work/customers"
 alias dotfiles="cd $HOME/dotfiles"
 alias hints="cd $HOME/Programming/hints"
 alias me="cd $HOME/Documents/me"
