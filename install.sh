@@ -64,7 +64,7 @@ then
     mkdir -pv "${HOME}/Programming/Projects/private"
     mkdir -pv "${HOME}/Programming/Projects/work"
 else
-    echo "Will not create any 'Programming' folders."
+    echo "Will not create any \"Programming\" folders."
 fi
 
 echo -e "\nInstallation Complete!"
