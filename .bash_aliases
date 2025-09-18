@@ -43,7 +43,10 @@ alias lldate="ls -alF --sort=time"
 ## show commands entered before from .bash_history (usage: hgrep COMMAND)
 alias hgrep="history | grep"
 
-# python
+# PHP
+alias php_cc="php bin/console cache:clear"
+
+# Python
 alias py3="python3"
 alias py3.12="python3.12"
 alias python="python3"

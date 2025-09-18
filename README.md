@@ -2,7 +2,8 @@
 My dotfiles.
 
 ATTENTION:
-Repository folder has to be called "dotfiles" to ensure that everything works as intended.
+Repository folder has to be called "dotfiles" and should be located in /home/[USER]/ to ensure that everything works as 
+intended.
 
 ## Load dotfiles dir into a systems' home dir under ~/dotfiles
 `git clone git@github.com:Jojotyp/dotfiles.git ~/dotfiles`
