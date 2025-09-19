@@ -74,6 +74,7 @@ alias ..........="cd ../../../../../../../../.."
 alias ...........="cd ../../../../../../../../../.."
 
 # common dirs
+## general
 alias Documents="cd $HOME/Documents"
 alias Downloads="cd $HOME/Downloads"
 alias Music="cd $HOME/Music"
@@ -82,7 +83,6 @@ alias Programming="cd $HOME/Programming"
 alias Screenshots="cd $HOME/Screenshots"
 alias Videos="cd $HOME/Videos"
 
-alias customers="cd $HOME/Programming/Projects/work/customers"
 alias dotfiles="cd $HOME/dotfiles"
 alias hints="cd $HOME/Programming/hints"
 alias me="cd $HOME/Documents/me"
@@ -93,9 +93,13 @@ alias proj="cd $HOME/Programming/Projects"
 alias projv="cd /var/www/Projects"
 alias scripts="cd $HOME/Programming/scripts"
 alias venvs="cd $HOME/Programming/venvs"
+
+## work
+alias customers="cd $HOME/Programming/Projects/work/customers"
 alias work="cd $HOME/Programming/Projects/work"
 alias work_customers="cd $HOME/Programming/Projects/work/customers"
 alias work_idea="cd $HOME/Programming/Projects/work/IdeaProjects"
+alias work_ub="cd ./vendor/studio201/user-backend-bundle/src/Studio201/UserBackendBundle" # only from project root
 alias work_php="cd $HOME/Programming/Projects/work/PhpStormProjects"
 
 # GIT SSH key prompt session store PW
