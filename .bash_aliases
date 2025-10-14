@@ -24,6 +24,47 @@ curl_with_newline() {
 
 alias curl="curl_with_newline"
 
+# go to /home/fabi/Programming/Projects/private/<project> (or to a named project if you pass an argument)
+proj_root() {
+  local project="$1"
+  if [[ -n $project ]]; then
+    cd "/home/fabi/Programming/Projects/private/$project" 2>/dev/null || { echo "No such project: $project"; return 1; }
+    return
+  fi
+
+  local cur dest
+  cur="$(pwd)"
+  dest="$(printf '%s' "$cur" | sed -n 's#^\(/home/fabi/Programming/Projects/private/[^/]*\).*#\1#p')"
+
+  if [[ -n $dest ]]; then
+    cd "$dest" || return
+  else
+    echo "Not inside /home/fabi/Programming/Projects/private/<project> (pwd: $cur)"
+    return 1
+  fi
+}
+
+# go to /var/www/Projects/<project> (or to a named project if you pass an argument)
+projv_root() {
+  local project="$1"
+  if [[ -n $project ]]; then
+    cd "/var/www/Projects/$project" 2>/dev/null || { echo "No such project: $project"; return 1; }
+    return
+  fi
+
+  local cur dest
+  cur="$(pwd)"
+  dest="$(printf '%s' "$cur" | sed -n 's#^\(/var/www/Projects/[^/]*\).*#\1#p')"
+
+  if [[ -n $dest ]]; then
+    cd "$dest" || return
+  else
+    echo "Not inside /var/www/Projects/<project> (pwd: $cur)"
+    return 1
+  fi
+}
+
+
 # file and dir listing
 # colorize by LS_COLORS in dotfiles/load/shared_prompt.sh
 OS=$(uname)
@@ -95,7 +136,6 @@ alias scripts="cd $HOME/Programming/scripts"
 alias venvs="cd $HOME/Programming/venvs"
 
 ## work
-alias customers="cd $HOME/Programming/Projects/work/customers"
 alias work="cd $HOME/Programming/Projects/work"
 alias work_customers="cd $HOME/Programming/Projects/work/customers"
 alias work_idea="cd $HOME/Programming/Projects/work/IdeaProjects"
