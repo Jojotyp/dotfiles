@@ -10,12 +10,39 @@ cat_with_newline() {
 
 alias cat="cat_with_newline"
 
+# xclip
+## copy command output to  clipboard (usage: $COMMAND | clip)
+alias clip="xclip -selection clipboard"
+
 # copy last command to clipboard // no alias bc of awk syntax
 copy_last_command() {
-    command fc -ln -1 | awk '{$1=$1}1' | clip
+    # get last history line (fc -ln -1 prints last command)
+    last_line=$(command fc -ln -1 2>/dev/null) || return 1
+
+    # optional: normalize whitespace
+    trimmed=$(printf '%s\n' "$last_line" | awk '{$1=$1}1')
+
+    # copy to clipboard and print confirmation
+    printf '%s\n' "$trimmed" | eval clip
+    printf 'Copied:\n%s\n' \""$trimmed"\"
 }
 
 alias cplc="copy_last_command"
+
+# usage:
+# 1) recall a previous command with ↑, edit it to start with: cpfc <the command you want to copy>
+# 2) press Enter --> the text after "cpfc " is copied to clipboard
+# Also: you can call `cpfc some text here` and it will copy the arguments directly.
+copy_following_command() {
+    # If user supplied args when calling cpfc, copy those (simple mode)
+    if [ "$#" -gt 0 ]; then
+        printf '%s\n' "$*" | eval clip
+        printf 'Copied:\n%s\n' \""$*"\"
+    fi
+}
+
+alias cpfc="copy_following_command"
+
 
 curl_with_newline() {
     command curl "$@"
@@ -96,9 +123,6 @@ alias python="python3"
 alias uga="apt list --upgradable"
 alias upgradable="apt list --upgradable"
 
-# xclip
-## copy command output to  clipboard (usage: $COMMAND | clip)
-alias clip="xclip -selection clipboard"
 
 
 # DIRs #
