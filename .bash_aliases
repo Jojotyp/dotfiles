@@ -50,6 +50,7 @@ curl_with_newline() {
 }
 
 alias curl="curl_with_newline"
+#####
 
 # go to /home/fabi/Programming/Projects/private/<project> (or to a named project if you pass an argument)
 proj_root() {
@@ -89,6 +90,52 @@ projv_root() {
     echo "Not inside /var/www/Projects/<project> (pwd: $cur)"
     return 1
   fi
+}
+
+# file backup
+# create incremental backup next to the original file
+bak() {
+  if [ "$#" -ne 1 ]; then
+    printf 'Usage: bak FILE\n'
+    return 2
+  fi
+
+  local src="$1"
+
+  # existance & type checks
+  if [ ! -e "$src" ]; then
+    printf 'bak: source not found: %s\n' "$src" >&2
+    return 1
+  fi
+  if [ -d "$src" ]; then
+    printf 'bak: source is a directory (not supported): %s\n' "$src" >&2
+    return 1
+  fi
+
+  # first candidate: original + .bak
+  local candidate="${src}.bak"
+
+  # if free, copy and return
+  if [ ! -e "$candidate" ]; then
+    cp -a -- "$src" "$candidate" && printf 'Backup created: %s\n' "$candidate"
+    return $?
+  fi
+
+  # otherwise find next available numbered backup: file1.bak, file2.bak ...
+  local n=1
+  while : ; do
+    candidate="${src}${n}.bak"
+    if [ ! -e "$candidate" ]; then
+      cp -a -- "$src" "$candidate" && printf 'Backup created: %s\n' "$candidate"
+      return $?
+    fi
+    n=$((n + 1))
+    # safety cap to avoid infinite loop
+    if [ "$n" -gt 10000 ]; then
+      printf 'bak: failed to find free backup name after 10000 attempts\n' >&2
+      return 3
+    fi
+  done
 }
 
 
