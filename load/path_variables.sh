@@ -12,7 +12,7 @@ XDG_DATA_DIRS="${HOME}/.local/share/flatpak/exports/share:${XDG_DATA_DIRS}"
 export XDG_DATA_DIRS
 
 
-# PATH variables #
+# PATH & other variables #
 # include system binaries for user
 if [ -d "/sbin" ]; then
     export PATH="/sbin:$PATH"
@@ -61,7 +61,24 @@ fi
 #     export PATH="$PATH:$ANDROID_HOME/platform-tools"
 # fi
 
-# IntelliJ IDEA
+## Cargo (Rust)
+if [ -f "$HOME/.cargo/env" ]; then 
+    . "$HOME/.cargo/env"
+fi
+
+## Google Chrome
+if [ -f "/var/lib/flatpak/app/com.google.Chrome/current/active/files/bin/chrome" ]; then
+    # wrapper created with:
+    # sudo nano /usr/local/bin/google-chrome-flatpak
+    # #!/bin/bash
+    # flatpak run com.google.Chrome "$@"
+    # sudo chmod +x /usr/local/bin/google-chrome-flatpak
+    ## test with: /usr/local/bin/google-chrome-flatpak https://example.com
+    export CHROME_PATH="/usr/local/bin/google-chrome-flatpak"
+    export EDGE_PATH="/usr/local/bin/google-chrome-flatpak"
+fi
+
+## IntelliJ IDEA
 if [ -d "$HOME/.local/share/applications" ]; then
     export PATH="$HOME/.local/share/applications:$PATH"
 fi
@@ -96,9 +113,4 @@ fi
 ## Toolbox
 if [ -d "$HOME/.local/share/JetBrains/Toolbox/scripts" ]; then
     export ATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
-fi
-
-## Cargo (Rust)
-if [ -d "$HOME/.cargo/env" ]; then 
-    . "$HOME/.cargo/env"
 fi

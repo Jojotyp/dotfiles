@@ -72,6 +72,8 @@ proj_root() {
   fi
 }
 
+alias proj_root="proj_root" # for listing in 'alias'
+
 # go to /var/www/Projects/<project> (or to a named project if you pass an argument)
 projv_root() {
   local project="$1"
@@ -91,6 +93,9 @@ projv_root() {
     return 1
   fi
 }
+
+alias projv_root="projv_root" # for listing in 'alias'
+
 
 # file backup
 # create incremental backup next to the original file
@@ -137,6 +142,8 @@ bak() {
     fi
   done
 }
+
+alias bak="bak" # for listing in 'alias'
 
 
 # file and dir listing
