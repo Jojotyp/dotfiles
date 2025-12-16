@@ -3,14 +3,14 @@
 # This script creates symlinks from the home directory to any desired dotfiles in $HOME/dotfiles
 ############################
 
-# project has to be "~/dotfiles" (/home/USER/dotfiles)
+# project has to be "~/dotfiles" (/home/USER/dotfiles or on MacOS: /Users/USER/dotfiles)
 DIR_DOTFILES="${HOME}/dotfiles"
 source "${DIR_DOTFILES}/load/bash_utils.sh"
 
 echo -e "\nStarting installation through install.sh\n========================================"
 
 # list of files/folders to symlink in ${homedir}
-files=(bash_aliases bash_logout bash_profile bash_prompt bashrc nanorc)
+files=(bash_aliases bash_logout bash_profile bash_prompt bashrc nanorc zprofile zsh_aliases zsh_prompt zshrc)
 
 # change to the dotfiles directory
 echo "Changing to the ${DIR_DOTFILES} directory"

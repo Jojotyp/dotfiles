@@ -68,7 +68,7 @@ color_white=$(tput setaf 255)
 # symbolic links pointing to non-existent files (or -> orphaned): color_red)
 # Check if we are on macOS by looking for the OS uname
 OS=$(uname)
-if [ "$OS" == "Darwin" ]; then
+if [ "$OS" = "Darwin" ]; then
     export CLICOLOR=1
     # export LSCOLORS="ExGxCxDxCxegecabagacad"
     export LSCOLORS="exfxcxdxbxegedabagacad"

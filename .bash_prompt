@@ -23,7 +23,7 @@ PS1+="\[${hostStyle}\]@\h:"	    # hostname
 PS1+="\[${color_orange}\]\w"	# current working dir
 PS1+="\$(prompt_git)"           # Git repository details
 PS1+="\n"				        # start on new line
-if [ whoami == "root" ]; then
+if [ "$(whoami)" = "root" ]; then
     PS1+="\[${color_white}\]$ " # `#`
 else
     PS1+="\[${color_white}\]$ "	# `$`

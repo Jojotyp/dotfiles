@@ -149,7 +149,7 @@ alias bak="bak" # for listing in 'alias'
 # file and dir listing
 # colorize by LS_COLORS in dotfiles/load/shared_prompt.sh
 OS=$(uname)
-if [ "$OS" == "Darwin" ]; then
+if [ "$OS" = "Darwin" ]; then
     alias ls="ls -G"
 else
     alias ls="ls --color=auto -v" # colored; sorted: dotfiles -> normal files
@@ -227,6 +227,7 @@ alias git_ssh='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519'
 # SOURCING #
 ## ~/.bashrc
 alias s_brc="source ~/.bashrc"
+alias s_zrc="source ~/.zshrc"
 
 ## Python venv activate
 alias s_lv="source lvenv/bin/activate"
@@ -238,7 +239,7 @@ alias s_cv="source bin/activate" # activate in a current venv
 
 
 # root #
-if [ whoami == "root" ]; then
+if [ "$(whoami)" = "root" ]; then
     alias rm="rm -i"
     alias cp="cp -i"
     alias mv="mv -i"
