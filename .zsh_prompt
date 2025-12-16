@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+############################
+# Prompt setup for zsh (re-uses the shared color & helper logic)
+############################
+
+source "${HOME}/dotfiles/load/shared_prompt.sh"
+
+setopt PROMPT_SUBST
+
+prompt_reset="%{${reset_styles}%}"
+prompt_green="%{${color_green}%}"
+prompt_user="%{${userStyle}%}"
+prompt_host="%{${hostStyle}%}"
+prompt_orange="%{${color_orange}%}"
+prompt_white="%{${color_white}%}"
+
+PROMPT='$(prompt_venv)'
+PROMPT+="${prompt_green}[%*] ${prompt_reset}"
+PROMPT+="${prompt_user}%n${prompt_reset}"
+PROMPT+="${prompt_host}@%m:"
+PROMPT+="${prompt_orange}%~"
+PROMPT+='$(prompt_git)'
+PROMPT+=$'\n'
+PROMPT+="${prompt_white}$ ${prompt_reset}"
+
+export PROMPT

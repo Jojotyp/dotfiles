@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+#
+# Keep the zsh aliases exactly in sync with the bash aliases by sourcing the
+# shared file. This lets us maintain the definitions only once.
+
+if [ -f "${HOME}/dotfiles/.bash_aliases" ]; then
+    source "${HOME}/dotfiles/.bash_aliases"
+fi
