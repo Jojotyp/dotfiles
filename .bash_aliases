@@ -53,7 +53,7 @@ alias curl="curl_with_newline"
 #####
 
 # go to /home/fabi/Programming/Projects/private/<project> (or to a named project if you pass an argument)
-proj_root() {
+go_to_proj_root() {
   local project="$1"
   if [[ -n $project ]]; then
     cd "/home/fabi/Programming/Projects/private/$project" 2>/dev/null || { echo "No such project: $project"; return 1; }
@@ -72,10 +72,10 @@ proj_root() {
   fi
 }
 
-alias proj_root="proj_root" # for listing in 'alias'
+alias proj_root="go_to_proj_root"
 
 # go to /var/www/Projects/<project> (or to a named project if you pass an argument)
-projv_root() {
+go_to_projv_root() {
   local project="$1"
   if [[ -n $project ]]; then
     cd "/var/www/Projects/$project" 2>/dev/null || { echo "No such project: $project"; return 1; }
@@ -94,12 +94,11 @@ projv_root() {
   fi
 }
 
-alias projv_root="projv_root" # for listing in 'alias'
-
+alias projv_root="go_to_projv_root" # for listing in 'alias'
 
 # file backup
 # create incremental backup next to the original file
-bak() {
+backup() {
   if [ "$#" -ne 1 ]; then
     printf 'Usage: bak FILE\n'
     return 2
@@ -143,7 +142,7 @@ bak() {
   done
 }
 
-alias bak="bak" # for listing in 'alias'
+alias bak="backup" # for listing in 'alias'
 
 
 # file and dir listing
