@@ -10,9 +10,11 @@ cat_with_newline() {
 
 alias cat="cat_with_newline"
 
+
 # xclip
 ## copy command output to  clipboard (usage: $COMMAND | clip)
 alias clip="xclip -selection clipboard"
+
 
 # copy last command to clipboard // no alias bc of awk syntax
 copy_last_command() {
@@ -28,6 +30,7 @@ copy_last_command() {
 }
 
 alias cplc="copy_last_command"
+
 
 # usage:
 # 1) recall a previous command with ↑, edit it to start with: cpfc <the command you want to copy>
@@ -50,7 +53,11 @@ curl_with_newline() {
 }
 
 alias curl="curl_with_newline"
-#####
+
+
+# Import Mapping messenger
+alias im_messenger="php bin/console messenger:consume async -vv"
+
 
 # go to /home/fabi/Programming/Projects/private/<project> (or to a named project if you pass an argument)
 go_to_proj_root() {
@@ -74,6 +81,7 @@ go_to_proj_root() {
 
 alias proj_root="go_to_proj_root"
 
+
 # go to /var/www/Projects/<project> (or to a named project if you pass an argument)
 go_to_projv_root() {
   local project="$1"
@@ -95,6 +103,7 @@ go_to_projv_root() {
 }
 
 alias projv_root="go_to_projv_root" # for listing in 'alias'
+
 
 # file backup
 # create incremental backup next to the original file
@@ -143,6 +152,7 @@ backup() {
 }
 
 alias bak="backup" # for listing in 'alias'
+#####
 
 
 # file and dir listing
