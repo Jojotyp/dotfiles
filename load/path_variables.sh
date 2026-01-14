@@ -1,6 +1,12 @@
 #!/usr/bin/bash
 ############################
 # This script provides PATH variables for .bashrc
+
+# to prepend to PATH
+## PATH="$[VAR]/[REST_PATH]:$PATH"
+
+# to append to PATH
+## PATH="$PATH:$[VAR]/[REST_PATH]
 ############################
 
 # Set Flatpak application paths to show them in desktop environment
@@ -12,7 +18,7 @@ XDG_DATA_DIRS="${HOME}/.local/share/flatpak/exports/share:${XDG_DATA_DIRS}"
 export XDG_DATA_DIRS
 
 
-# PATH & other variables #
+# PATH & OTHER VARIABLES #
 # include system binaries for user
 if [ -d "/sbin" ]; then
     export PATH="/sbin:$PATH"
@@ -81,6 +87,7 @@ if [ -f "/var/lib/flatpak/app/com.google.Chrome/current/active/files/bin/chrome"
     ## test with: /usr/local/bin/google-chrome-flatpak https://example.com
     export CHROME_PATH="/usr/local/bin/google-chrome-flatpak"
     export EDGE_PATH="/usr/local/bin/google-chrome-flatpak"
+    export PATH="$PATH:$CHROME_PATH"
 fi
 
 ## IntelliJ IDEA
