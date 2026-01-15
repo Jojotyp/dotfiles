@@ -13,7 +13,20 @@ alias cat="cat_with_newline"
 
 # xclip
 ## copy command output to  clipboard (usage: $COMMAND | clip)
-alias clip="xclip -selection clipboard"
+# Check if we are on macOS by looking for the OS uname
+clip_output() {
+    if command -v pbcopy >/dev/null 2>&1; then
+        pbcopy
+    elif command -v xclip >/dev/null 2>&1; then
+        xclip -selection clipboard
+    else
+        echo "No clipboard tool found (pbcopy/wl-copy/xclip/xsel)." >&2
+        return 1
+    fi
+}
+
+# clipboard (macOS)
+alias clip="clip_output"
 
 
 # copy last command to clipboard // no alias bc of awk syntax
