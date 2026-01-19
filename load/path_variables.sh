@@ -51,14 +51,36 @@ if [ -d "/opt/android-studio/bin" ]; then
 fi
 
 ## Android platform-tools
-if [ -d "$HOME/Android/Sdk" ]; then
-    export ANDROID_HOME="$HOME/Android/Sdk"
-    export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
-    export PATH="$PATH:$ANDROID_HOME/emulator"
-    export PATH="$PATH:$ANDROID_HOME/platform-tools"
+# Android SDK (Linux: ~/Android/Sdk, macOS: ~/Library/Android/sdk)
+_android_sdk=""
+for d in "$HOME/Android/Sdk" "$HOME/Library/Android/sdk"; do
+  if [ -d "$d" ]; then
+    _android_sdk="$d"
+    break
+  fi
+done
 
-    export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+if [ -n "$_android_sdk" ]; then
+  export ANDROID_HOME="$_android_sdk"
+  export ANDROID_SDK_ROOT="$_android_sdk"
+
+  # Add to PATH only if the directory exists
+  [ -d "$ANDROID_HOME/platform-tools" ] && export PATH="$PATH:$ANDROID_HOME/platform-tools"
+  [ -d "$ANDROID_HOME/emulator" ] && export PATH="$PATH:$ANDROID_HOME/emulator"
+
+  # cmdline-tools: prefer latest, but also accept a versioned folder
+  if [ -d "$ANDROID_HOME/cmdline-tools/latest/bin" ]; then
+    export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+  else
+    # pick first versioned cmdline-tools directory if present
+    for v in "$ANDROID_HOME/cmdline-tools"/*/bin; do
+      [ -d "$v" ] && export PATH="$PATH:$v" && break
+    done
+  fi
 fi
+
+unset _android_sdk
+
 
 # ## Android platform-tools
 # if [ -d "/usr/lib/android-sdk/cmdline-tools" ] && [ -d "/usr/lib/android-sdk/platform-tools" ]; then
@@ -77,18 +99,37 @@ if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
-## Google Chrome
-if [ -f "/var/lib/flatpak/app/com.google.Chrome/current/active/files/bin/chrome" ]; then
-    # wrapper created with:
-    # sudo nano /usr/local/bin/google-chrome-flatpak
-    # #!/bin/bash
-    # flatpak run com.google.Chrome "$@"
-    # sudo chmod +x /usr/local/bin/google-chrome-flatpak
-    ## test with: /usr/local/bin/google-chrome-flatpak https://example.com
-    export CHROME_PATH="/usr/local/bin/google-chrome-flatpak"
-    export EDGE_PATH="/usr/local/bin/google-chrome-flatpak"
-    export PATH="$PATH:$CHROME_PATH"
+## Google Chrome / Microsoft Edge (Linux + macOS)
+# --- Linux (your Flatpak wrapper) ---
+if [ -x "/usr/local/bin/google-chrome-flatpak" ]; then
+  export CHROME_PATH="/usr/local/bin/google-chrome-flatpak"
+  export EDGE_PATH="/usr/local/bin/google-chrome-flatpak"
 fi
+
+# --- macOS ---
+# Prefer Chrome, fall back to Edge if you want
+if [ -z "${CHROME_PATH:-}" ]; then
+  if [ -x "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ]; then
+    export CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+  elif [ -x "$HOME/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ]; then
+    export CHROME_PATH="$HOME/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+  fi
+fi
+
+if [ -z "${EDGE_PATH:-}" ]; then
+  if [ -x "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge" ]; then
+    export EDGE_PATH="/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge"
+  elif [ -x "$HOME/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge" ]; then
+    export EDGE_PATH="$HOME/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge"
+  fi
+fi
+
+# Optional: provide `google-chrome` command on macOS (handy for scripts)
+# (Symlink is cleaner, but alias works without admin rights)
+if [ -n "${CHROME_PATH:-}" ]; then
+  alias google-chrome="\"$CHROME_PATH\""
+fi
+
 
 ## IntelliJ IDEA
 if [ -d "$HOME/.local/share/applications" ]; then
@@ -103,16 +144,53 @@ if [ -d "/opt/ImageMagick" ]; then
     export LD_LIBRARY_PATH
 fi
 
-## jdk (Java)
-if [ -d "/usr/lib/jvm" ]; then
-    export JAVA_HOME=$(dirname $(dirname $(readlink -f /usr/bin/java))) # dynamically determine path to jdk
-    export PATH="${JAVA_HOME}/bin:$PATH" # something like: /usr/lib/jvm/jdk-[VERSION]-oracle-x64/bin
+## JDK (Java) - Linux + macOS
+# Prefer JDK 17 if available (Android/Gradle friendly)
+if command -v /usr/libexec/java_home >/dev/null 2>&1; then
+  # macOS (Temurin installs into /Library/Java/JavaVirtualMachines)
+  _JAVA_HOME="$(/usr/libexec/java_home -v 17 2>/dev/null || /usr/libexec/java_home 2>/dev/null)"
+  if [ -n "$_JAVA_HOME" ] && [ -d "$_JAVA_HOME" ]; then
+    export JAVA_HOME="$_JAVA_HOME"
+    export PATH="$JAVA_HOME/bin:$PATH"
+  fi
+  unset _JAVA_HOME
+
+elif [ -d "/usr/lib/jvm" ]; then
+  # Linux (common layouts)
+  if command -v readlink >/dev/null 2>&1 && [ -x /usr/bin/java ]; then
+    _JAVA_BIN="$(readlink -f /usr/bin/java 2>/dev/null)"
+    if [ -n "$_JAVA_BIN" ]; then
+      export JAVA_HOME="$(dirname "$(dirname "$_JAVA_BIN")")"
+      export PATH="$JAVA_HOME/bin:$PATH"
+    fi
+    unset _JAVA_BIN
+  fi
 fi
 
+
 ## nvm
+## nvm (Linux + macOS/Homebrew)
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -d "$NVM_DIR" ] || mkdir -p "$NVM_DIR"
+
+# 1) Prefer "classic" install (common on Linux): ~/.nvm/nvm.sh
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  . "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+# 2) Fallback: Homebrew install (common on macOS)
+elif command -v brew >/dev/null 2>&1; then
+  _NVM_BREW_PREFIX="$(brew --prefix nvm 2>/dev/null)"
+
+  if [ -n "$_NVM_BREW_PREFIX" ] && [ -s "$_NVM_BREW_PREFIX/nvm.sh" ]; then
+    . "$_NVM_BREW_PREFIX/nvm.sh"
+
+    # optional completion (works fine in zsh)
+    [ -s "$_NVM_BREW_PREFIX/etc/bash_completion.d/nvm" ] && . "$_NVM_BREW_PREFIX/etc/bash_completion.d/nvm"
+  fi
+
+  unset _NVM_BREW_PREFIX
+fi
 
 ## OpenSSL
 export OPENSSL_ROOT_DIR="/usr/"

@@ -1,3 +1,4 @@
+source ~/.profile
 # .bash_profile
 
 # call .bashrc to syncronize
