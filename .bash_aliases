@@ -172,7 +172,11 @@ alias bak="backup" # for listing in 'alias'
 # colorize by LS_COLORS in dotfiles/load/shared_prompt.sh
 OS=$(uname)
 if [ "$OS" = "Darwin" ]; then
-    alias ls="ls -G"
+    if command -v gls >/dev/null 2>&1; then
+        alias ls="gls --color=auto -v"
+    else
+        alias ls="ls -G"
+    fi
 else
     alias ls="ls --color=auto -v" # colored; sorted: dotfiles -> normal files
 fi
@@ -180,25 +184,39 @@ fi
 alias l="ls -CF"
 alias la="ls -a"
 alias ll="ls -alF"
-alias llsize="ls -alF --sort=size"
-alias lldate="ls -alF --sort=time"
+if [ "$OS" = "Darwin" ]; then
+    alias llsize="ls -alF -S"
+    alias lldate="ls -alF -t"
+else
+    alias llsize="ls -alF --sort=size"
+    alias lldate="ls -alF --sort=time"
+fi
+
+# long listing, alphabetical with directories first; macOS needs "coreutils" package
+llalpha() {
+    if command -v gls >/dev/null 2>&1; then
+        gls -alF --color=auto --group-directories-first --sort=name "$@"
+        return
+    fi
+    if ls --group-directories-first >/dev/null 2>&1; then
+        command ls -alF --color=auto --group-directories-first --sort=name "$@"
+        return
+    fi
+
+    # BSD fallback: approximate alpha sort by name; directories first.
+    local total
+    total=$(command ls -alFG "$@" 2>/dev/null | sed -n '1p')
+    [ -n "$total" ] && printf '%s\n' "$total"
+    command ls -alFG -d "$@"*/ 2>/dev/null | sed '1d' | sort -f -k9,9
+    command ls -alFG -p "$@" 2>/dev/null | sed '1d' | awk '$NF !~ /\/$/' | sort -f -k9,9
+}
+
+alias lls="llalpha"
+
 
 # history grep of commands
 ## show commands entered before from .bash_history (usage: hgrep COMMAND)
 alias hgrep="history | grep"
-
-# PHP
-alias php_cc="php bin/console cache:clear"
-
-# Python
-alias py3="python3"
-alias py3.12="python3.12"
-alias python="python3"
-
-# upgradable
-alias uga="apt list --upgradable"
-alias upgradable="apt list --upgradable"
-
 
 
 # DIRs #
@@ -258,6 +276,22 @@ alias s_cv="source bin/activate" # activate in a current venv
 
 
 # OTHERS #
+# PHP
+alias php_cc="php bin/console cache:clear"
+
+# Python
+alias py3="python3"
+alias py3.12="python3.12"
+alias python="python3"
+
+# sync screenshots from currently connected Android phone to ~/Screenshots/<PHONE>/
+alias syncs="~/Programming/scripts/screenshot-phone-sync/sync_screenshots.sh"
+
+# upgradable
+if command -v apt >/dev/null 2>&1; then
+    alias uga="apt list --upgradable"
+    alias upgradable="apt list --upgradable"
+fi
 
 
 # root #

@@ -70,8 +70,9 @@ color_white=$(tput setaf 255)
 OS=$(uname)
 if [ "$OS" = "Darwin" ]; then
     export CLICOLOR=1
-    # export LSCOLORS="ExGxCxDxCxegecabagacad"
-    export LSCOLORS="exfxcxdxbxegedabagacad"
+    # Align macOS colors with Linux LS_COLORS:
+    # di=blue, ex=green, fi=light grey, ln=cyan.
+    export LSCOLORS="exGxHxHxCxExExHxHxHxHx"
 else
     unset LS_COLORS
     export LS_COLORS='di=38;5;27:ex=38;5;28:fi=38;5;255:ln=38;5;123:or=38;5;167'
