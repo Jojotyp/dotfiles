@@ -63,6 +63,10 @@ then
     mkdir -pv "${HOME}/Programming/Projects"
     mkdir -pv "${HOME}/Programming/Projects/private"
     mkdir -pv "${HOME}/Programming/Projects/work"
+    mkdir -pv "${HOME}/Programming/Projects/work/customers"
+    mkdir -pv "${HOME}/Programming/Projects/work/databaseDumps"
+    mkdir -pv "${HOME}/Programming/Projects/work/IdeaProjects"
+    mkdir -pv "${HOME}/Programming/Projects/work/SymfonyProjects"
 else
     echo "Will not create any \"Programming\" folders."
 fi

@@ -29,16 +29,31 @@ clip_output() {
 alias clip="clip_output"
 
 
-# copy last command to clipboard // no alias bc of awk syntax
 copy_last_command() {
-    # get last history line (fc -ln -1 prints last command)
-    last_line=$(command fc -ln -1 2>/dev/null) || return 1
+    local last_line
+    
+    if [ -n "$ZSH_VERSION" ]; then
+        # Zsh: -1 is the current command, so we need -2
+        last_line=$(fc -ln -2 -2 2>/dev/null)
+    else
+        # Bash: -1 is the previous command
+        last_line=$(fc -ln -1 2>/dev/null)
+    fi
 
-    # optional: normalize whitespace
+    # Exit if nothing was found
+    [ -z "$last_line" ] && return 1
+
+    # Normalize whitespace
     trimmed=$(printf '%s\n' "$last_line" | awk '{$1=$1}1')
 
-    # copy to clipboard and print confirmation
-    printf '%s\n' "$trimmed" | eval clip
+    # macOS uses 'pbcopy', Linux usually 'xclip' or 'wl-copy'
+    # This check ensures 'clip' works on both
+    if command -v pbcopy >/dev/null 2>&1; then
+        printf '%s' "$trimmed" | pbcopy
+    else
+        printf '%s' "$trimmed" | eval clip
+    fi
+
     printf 'Copied:\n%s\n' \""$trimmed"\"
 }
 
@@ -254,8 +269,8 @@ alias scripts="cd $HOME/Programming/scripts"
 alias venvs="cd $HOME/Programming/venvs"
 
 ## work
+alias customers="cd $HOME/Programming/Projects/work/customers"
 alias work="cd $HOME/Programming/Projects/work"
-alias work_customers="cd $HOME/Programming/Projects/work/customers"
 alias work_idea="cd $HOME/Programming/Projects/work/IdeaProjects"
 alias work_ub="cd ./vendor/studio201/user-backend-bundle/src/Studio201/UserBackendBundle" # only from project root
 alias work_php="cd $HOME/Programming/Projects/work/PhpStormProjects"
