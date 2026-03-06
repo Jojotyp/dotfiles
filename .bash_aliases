@@ -299,7 +299,8 @@ alias py3="python3"
 alias py3.12="python3.12"
 alias python="python3"
 
-# sync screenshots from currently connected Android phone to ~/Screenshots/<PHONE>/
+# sync most recent screenshots and camera photos from currently connected Android phone to ~/Screenshots/<PHONE>/
+alias syncc="~/Programming/scripts/screenshot-phone-sync/sync_camera.sh"
 alias syncs="~/Programming/scripts/screenshot-phone-sync/sync_screenshots.sh"
 
 # upgradable
