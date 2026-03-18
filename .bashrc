@@ -33,3 +33,9 @@ for file in ~/dotfiles/load/{locale_variables,path_variables}; do
     . $file.sh
 done;
 unset file;
+
+
+# # Set up fzf key bindings and fuzzy completion; needs at least version 0.48.0
+# if command -v fzf >/dev/null 2>&1; then
+#   eval "$(fzf --bash)"
+# fi
