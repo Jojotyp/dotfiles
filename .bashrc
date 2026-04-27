@@ -34,6 +34,10 @@ for file in ~/dotfiles/load/{locale_variables,path_variables}; do
 done;
 unset file;
 
+# zoxide for z and zi command (fuzzy cd)
+if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init bash)"
+fi
 
 # # Set up fzf key bindings and fuzzy completion; needs at least version 0.48.0
 # if command -v fzf >/dev/null 2>&1; then
