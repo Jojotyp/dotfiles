@@ -202,5 +202,5 @@ fi
 
 ## Toolbox
 if [ -d "$HOME/.local/share/JetBrains/Toolbox/scripts" ]; then
-    export ATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
+    export PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
 fi

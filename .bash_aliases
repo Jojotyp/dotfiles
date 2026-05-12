@@ -136,47 +136,115 @@ alias projv_root="go_to_projv_root" # for listing in 'alias'
 # file backup
 # create incremental backup next to the original file
 backup() {
-  if [ "$#" -ne 1 ]; then
-    printf 'Usage: bak FILE\n'
-    return 2
+  # Usage: bak [--no-increment] FILE [FILE ...]  or  bak [--no-increment]  # paste paths, then Ctrl-D
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    printf 'Usage: bak [--no-increment] FILE [FILE ...]\n'
+    printf '   or: bak [--no-increment]    # paste newline-delimited paths, then press Ctrl-D\n'
+    printf '\n'
+    printf 'Options:\n'
+    printf '  --no-increment  skip files whose .bak already exists instead of creating FILE1.bak\n'
+    return 0
   fi
 
-  local src="$1"
+  local src candidate n status=0 no_increment=0
+  local -a sources=()
 
-  # existance & type checks
-  if [ ! -e "$src" ]; then
-    printf 'bak: source not found: %s\n' "$src" >&2
-    return 1
-  fi
-  if [ -d "$src" ]; then
-    printf 'bak: source is a directory (not supported): %s\n' "$src" >&2
-    return 1
-  fi
-
-  # first candidate: original + .bak
-  local candidate="${src}.bak"
-
-  # if free, copy and return
-  if [ ! -e "$candidate" ]; then
-    cp -a -- "$src" "$candidate" && printf 'Backup created: %s\n' "$candidate"
-    return $?
-  fi
-
-  # otherwise find next available numbered backup: file1.bak, file2.bak ...
-  local n=1
-  while : ; do
-    candidate="${src}${n}.bak"
-    if [ ! -e "$candidate" ]; then
-      cp -a -- "$src" "$candidate" && printf 'Backup created: %s\n' "$candidate"
-      return $?
-    fi
-    n=$((n + 1))
-    # safety cap to avoid infinite loop
-    if [ "$n" -gt 10000 ]; then
-      printf 'bak: failed to find free backup name after 10000 attempts\n' >&2
-      return 3
-    fi
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      --no-increment)
+        no_increment=1
+        ;;
+      --)
+        shift
+        sources+=("$@")
+        break
+        ;;
+      -*)
+        printf 'bak: unknown option: %s\n' "$1" >&2
+        printf 'Usage: bak [--no-increment] FILE [FILE ...]\n' >&2
+        return 2
+        ;;
+      *)
+        sources+=("$1")
+        ;;
+    esac
+    shift
   done
+
+  if [ "${#sources[@]}" -lt 1 ]; then
+    if [ -t 0 ]; then
+      printf 'Paste newline-delimited paths, then press Ctrl-D.\n' >&2
+    fi
+
+    while IFS= read -r src || [ -n "$src" ]; do
+      src="${src#"${src%%[![:space:]]*}"}"
+      src="${src%"${src##*[![:space:]]}"}"
+      if [ -n "$src" ]; then
+        sources+=("$src")
+      fi
+    done
+
+    if [ "${#sources[@]}" -lt 1 ]; then
+      printf 'Usage: bak [--no-increment] FILE [FILE ...]\n'
+      printf '   or: bak [--no-increment]    # paste newline-delimited paths, then press Ctrl-D\n'
+      return 2
+    fi
+  fi
+
+  for src in "${sources[@]}"; do
+    # existence & type checks
+    if [ ! -e "$src" ]; then
+      printf 'bak: source not found: %s\n' "$src" >&2
+      status=1
+      continue
+    fi
+    if [ -d "$src" ]; then
+      printf 'bak: source is a directory (not supported): %s\n' "$src" >&2
+      status=1
+      continue
+    fi
+
+    # first candidate: original + .bak
+    candidate="${src}.bak"
+
+    # if free, copy and continue
+    if [ ! -e "$candidate" ]; then
+      if cp -a -- "$src" "$candidate"; then
+        printf 'Backup created: %s\n' "$candidate"
+      else
+        status=1
+      fi
+      continue
+    fi
+
+    if [ "$no_increment" -eq 1 ]; then
+      printf 'bak: backup already exists, skipping: %s\n' "$candidate" >&2
+      continue
+    fi
+
+    # otherwise find next available numbered backup: file1.bak, file2.bak ...
+    n=1
+    while : ; do
+      candidate="${src}${n}.bak"
+      if [ ! -e "$candidate" ]; then
+        if cp -a -- "$src" "$candidate"; then
+          printf 'Backup created: %s\n' "$candidate"
+        else
+          status=1
+        fi
+        break
+      fi
+      n=$((n + 1))
+      # safety cap to avoid infinite loop
+      if [ "$n" -gt 10000 ]; then
+        printf 'bak: failed to find free backup name after 10000 attempts: %s\n' "$src" >&2
+        status=3
+        break
+      fi
+    done
+  done
+
+  return "$status"
 }
 
 alias bak="backup" # for listing in 'alias'

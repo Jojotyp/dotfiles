@@ -16,6 +16,10 @@ for file in ~/.{bash_aliases,bash_prompt}; do
 done;
 unset file;
 
+# prevent EOF (CTRL + D) closing the shell at an empty Bash prompt; other CTRL + D behavior is preserved
+set -o ignoreeof
+# alternatively close shell after n signals
+# export IGNOREEOF=10
 
 # append to the history file, don't overwrite it
 shopt -s histappend
