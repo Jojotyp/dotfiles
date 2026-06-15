@@ -140,6 +140,7 @@ backup() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf 'Usage: bak [--no-increment] FILE [FILE ...]\n'
     printf '   or: bak [--no-increment]    # paste newline-delimited paths, then press Ctrl-D\n'
+    printf 'Note: for a multiline command, put \\ at the end of each continued line.\n'
     printf '\n'
     printf 'Options:\n'
     printf '  --no-increment  skip files whose .bak already exists instead of creating FILE1.bak\n'
@@ -187,6 +188,7 @@ backup() {
     if [ "${#sources[@]}" -lt 1 ]; then
       printf 'Usage: bak [--no-increment] FILE [FILE ...]\n'
       printf '   or: bak [--no-increment]    # paste newline-delimited paths, then press Ctrl-D\n'
+      printf 'Note: for a multiline command, put \\ at the end of each continued line.\n'
       return 2
     fi
   fi
