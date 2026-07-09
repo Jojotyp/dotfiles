@@ -372,6 +372,7 @@ alias python="python3"
 # sync most recent screenshots and camera photos from currently connected Android phone to ~/Screenshots/<PHONE>/
 alias syncc="~/Programming/scripts/screenshot-phone-sync/sync_camera.sh"
 alias syncs="~/Programming/scripts/screenshot-phone-sync/sync_screenshots.sh"
+alias syncr="~/Programming/scripts/screenshot-phone-sync/sync_recent.sh"
 
 # upgradable
 if command -v apt >/dev/null 2>&1; then
