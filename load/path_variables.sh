@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 ############################
 # This script provides PATH variables for .bashrc
 

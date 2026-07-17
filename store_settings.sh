@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 ############################
 # This script stores settings of applications to ${HOME}/dotfiles/settings/
 ############################

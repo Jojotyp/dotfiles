@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 ############################
 # This script provides git status info in prompt, venv info in prompt and colorization for .bashrc
 ############################
