@@ -52,6 +52,32 @@ done
 
 echo ""
 
+# create Documents folders
+read -r -p "Do you want to create \"Documents\" folders (i.e. ~/Documents/work) [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+    echo "Creating ~/Documents folders (if not already existing):"
+    mkdir -pv "${HOME}/Documents/Fussball"
+    mkdir -pv "${HOME}/Documents/Studium"
+    mkdir -pv "${HOME}/Documents/work"
+else
+    echo "Will not create any \"Documents\" folders."
+fi
+
+# create Pictures folders
+read -r -p "Do you want to create \"Pictures\" folders (i.e. ~/Pictures/phone) [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+    echo "Creating ~/Pictures folders (if not already existing):"
+    mkdir -pv "${HOME}/Pictures/logos"
+    mkdir -pv "${HOME}/Pictures/memes"
+    mkdir -pv "${HOME}/Pictures/phone"
+    mkdir -pv "${HOME}/Pictures/vacation"
+    mkdir -pv "${HOME}/Pictures/work"
+else
+    echo "Will not create any \"Pictures\" folders."
+fi
+
 # create repository folders
 read -r -p "Do you want to create \"Programming\" folders (i.e. ~/Programming/Projects) [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
@@ -66,6 +92,7 @@ then
     mkdir -pv "${HOME}/Programming/Projects/work/customers"
     mkdir -pv "${HOME}/Programming/Projects/work/databaseDumps"
     mkdir -pv "${HOME}/Programming/Projects/work/IdeaProjects"
+    mkdir -pv "${HOME}/Programming/Projects/work/s201"
     mkdir -pv "${HOME}/Programming/Projects/work/SymfonyProjects"
 else
     echo "Will not create any \"Programming\" folders."
