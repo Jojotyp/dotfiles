@@ -20,7 +20,7 @@ clip_output() {
     elif command -v xclip >/dev/null 2>&1; then
         xclip -selection clipboard
     else
-        echo "No clipboard tool found (pbcopy/wl-copy/xclip/xsel)." >&2
+        echo "No clipboard tool found (pbcopy/xclip)." >&2
         return 1
     fi
 }
@@ -46,7 +46,7 @@ copy_last_command() {
     # Normalize whitespace
     trimmed=$(printf '%s\n' "$last_line" | awk '{$1=$1}1')
 
-    # macOS uses 'pbcopy', Linux usually 'xclip' or 'wl-copy'
+    # macOS uses 'pbcopy', Linux usually 'xclip'
     # This check ensures 'clip' works on both
     if command -v pbcopy >/dev/null 2>&1; then
         printf '%s' "$trimmed" | pbcopy
@@ -131,6 +131,37 @@ go_to_projv_root() {
 }
 
 alias projv_root="go_to_projv_root" # for listing in 'alias'
+
+
+# go to .../(IdeaProjects|PhpStormProjects|SymfonyProjects)/<project>
+go_to_work_proj_root_symfony() {
+  local cur prefix rest project dest
+  cur="$(pwd)"
+
+  local roots=("IdeaProjects" "PhpStormProjects" "SymfonyProjects")
+  local root
+  for root in "${roots[@]}"; do
+    prefix="${cur%%/$root/*}"
+    if [[ "$prefix" != "$cur" ]]; then
+      rest="${cur#"$prefix/$root/"}"
+      project="${rest%%/*}"
+      if [[ -n "$project" ]]; then
+        if [[ -n "$prefix" ]]; then
+          dest="$prefix/$root/$project"
+        else
+          dest="/$root/$project"
+        fi
+        cd "$dest" || return
+        return
+      fi
+    fi
+  done
+
+  echo "None of IdeaProjects, PhpStormProjects, SymfonyProjects found in path: $cur"
+  return 1
+}
+
+alias work_proj_root_symfony="go_to_work_proj_root_symfony"
 
 
 # file backup
@@ -378,6 +409,9 @@ alias syncr="~/Programming/scripts/screenshot-phone-sync/sync_recent.sh"
 if command -v apt >/dev/null 2>&1; then
     alias uga="apt list --upgradable"
     alias upgradable="apt list --upgradable"
+elif command -v brew >/dev/null 2>&1; then
+    alias uga="brew outdated"
+    alias upgradable="brew outdated"
 fi
 
 
