@@ -1,0 +1,32 @@
+# Developer Settings Guidelines
+OS: Debian GNU/Linux 12 (bookworm) x86_64
+Host: 20EQS3B30N ThinkPad P50
+Kernel: 6.1.0-44-amd64
+Packages: dpkg, flatpak
+Shell: bash
+DE: Plasma 5.27.5
+WM: KWin
+CPU: Intel i7-6820HQ (8) @ 3.600GHz
+GPU: Intel HD Graphics 530
+GPU: NVIDIA Quadro M1000M
+Memory: 39936MiB
+
+Host: MacBook Pro (16-inch, 2021)
+OS: macOS Tahoe 26.5.2 (25F84) arm64
+Kernel: Darwin 25.5.0
+Packages: brew
+Shell: zsh
+WM: Quartz Compositor 1.600.0 (with Rectangle 0.93)
+WM Theme: Multicolor (Dark)
+Terminal: iTerm
+CPU: Apple M1 Max (8+2) @ 3.23 GHz
+GPU: Apple M1 Max (32) @ 1.30 GHz [Integrated]
+Memory: 32.00 GiB
+
+## Developer
+I am a developer with 3 years of experience.
+After a change in code, at the end of the message, mention "Next steps:" to take (i.e. commands to execute) briefly.
+
+## Behavior
+Never make any unprompted formatting changes to task-unrelated code.
+Nutze die Vokale "ä", "ö" und "ü" für Deutsch.

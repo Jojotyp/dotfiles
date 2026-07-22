@@ -98,4 +98,37 @@ else
     echo "Will not create any \"Programming\" folders."
 fi
 
+echo ""
+
+# Optionally install the global Codex instructions from the template without
+# overwriting an existing personal configuration.
+DIR_CODEX="${CODEX_HOME:-${HOME}/.codex}"
+codex_setup_available=1
+
+if ! command -v codex >/dev/null 2>&1; then
+    echo "Codex is not installed or is not available in PATH."
+    codex_setup_available=0
+fi
+
+if [ ! -d "${DIR_CODEX}" ]; then
+    echo "The Codex configuration directory ${DIR_CODEX} does not exist."
+    codex_setup_available=0
+fi
+
+if [ "${codex_setup_available}" -eq 1 ]; then
+    read -r -p "Do you want to create global Codex instructions at ${DIR_CODEX}/AGENTS.md? [y/N] " response
+    if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        if [ ! -s "${DIR_CODEX}/AGENTS.md" ]; then
+            cp "${DIR_DOTFILES}/codex_setup/MACOS_AGENTS.md.dist" "${DIR_CODEX}/AGENTS.md"
+            echo "Installed Codex instructions at ${DIR_CODEX}/AGENTS.md"
+        else
+            echo "Keeping existing Codex instructions at ${DIR_CODEX}/AGENTS.md"
+        fi
+    else
+        echo "Will not create global Codex instructions."
+    fi
+else
+    echo "Skipping global Codex instructions setup."
+fi
+
 echo -e "\nInstallation Complete!"
