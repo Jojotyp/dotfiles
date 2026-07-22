@@ -192,6 +192,13 @@ elif command -v brew >/dev/null 2>&1; then
   unset _NVM_BREW_PREFIX
 fi
 
+# nvm's default alias can point to a newer release than is installed locally.
+# In that case nvm is loaded, but node and npm are not added to PATH. Prefer the
+# configured default and fall back to the newest installed Node version.
+if command -v nvm >/dev/null 2>&1 && ! command -v node >/dev/null 2>&1; then
+  nvm use default --silent >/dev/null 2>&1 || nvm use node --silent >/dev/null 2>&1
+fi
+
 ## OpenSSL
 export OPENSSL_ROOT_DIR="/usr/"
 

@@ -19,3 +19,8 @@ for file in ~/dotfiles/load/{locale_variables,path_variables}; do
     [[ -r "${file}.sh" ]] && source "${file}.sh"
 done
 unset file
+
+# zoxide for z and zi command (fuzzy cd)
+if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+fi
