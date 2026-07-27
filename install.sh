@@ -119,10 +119,20 @@ if [ "${codex_setup_available}" -eq 1 ]; then
     read -r -p "Do you want to create global Codex instructions at ${DIR_CODEX}/AGENTS.md? [y/N] " response
     if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
         if [ ! -s "${DIR_CODEX}/AGENTS.md" ]; then
-            cp "${DIR_DOTFILES}/codex_setup/MACOS_AGENTS.md.dist" "${DIR_CODEX}/AGENTS.md"
-            echo "Installed Codex instructions at ${DIR_CODEX}/AGENTS.md"
+            if [ "$(uname -s)" = "Linux" ]; then
+                codex_agents_template="LINUX_AGENTS.md.dist"
+            elif [ "$(uname -s)" = "Darwin" ]; then
+                codex_agents_template="MACOS_AGENTS.md.dist"
+            else
+                codex_agents_template=""
+                echo "Unsupported operating system. Skipping global Codex instructions setup."
+            fi
+            if [ -n "${codex_agents_template}" ]; then
+                cp "${DIR_DOTFILES}/codex_setup/${codex_agents_template}" "${DIR_CODEX}/AGENTS.md"
+                echo "Installed Codex instructions at ${DIR_CODEX}/AGENTS.md"
+            fi
         else
-            echo "Keeping existing Codex instructions at ${DIR_CODEX}/AGENTS.md"
+            echo "NOT installing! Keeping already existing Codex instructions at ${DIR_CODEX}/AGENTS.md"
         fi
     else
         echo "Will not create global Codex instructions."

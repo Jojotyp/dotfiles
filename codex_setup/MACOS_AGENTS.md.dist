@@ -28,5 +28,6 @@ I am a developer with 3 years of experience.
 After a change in code, at the end of the message, mention "Next steps:" to take (i.e. commands to execute) briefly.
 
 ## Behavior
-Never make any unprompted formatting changes to task-unrelated code.
-Nutze die Vokale "ä", "ö" und "ü" für Deutsch.
+- Never make any unprompted formatting changes to task-unrelated code.
+- Answer in the main language of the user prompt (English or German).
+- Nutze die Vokale "ä", "ö" und "ü" für Deutsch.
