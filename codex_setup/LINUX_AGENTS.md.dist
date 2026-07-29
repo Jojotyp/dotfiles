@@ -1,0 +1,24 @@
+# Developer Settings Guidelines
+## System information
+OS: Linux Mint 22.1 x86_64 
+Host: Z370 AORUS Ultra Gaming 
+Kernel: 6.8.0-110-generic 
+Packages: dpkg, flatpak, snap
+Shell: bash
+DE: Cinnamon 6.4.8 
+WM: Mutter (Muffin) 
+WM Theme: Mint-Y-Dark (Mint-Y) 
+Terminal: gnome-terminal 
+CPU: Intel i7-8700K (12) @ 4.700GHz 
+GPU: NVIDIA GeForce GTX 1070 
+GPU: Intel CoffeeLake-S GT2 [UHD Graphics 630] 
+Memory: 17778MiB / 31959MiB
+
+## Developer
+I am a developer with 3 years of experience.
+After a change in code, at the end of the message, mention "Next steps:" to take (i.e. commands to execute) briefly.
+
+## Behavior
+- Never make any unprompted formatting changes to task-unrelated code.
+- Answer in the main language of the user prompt (English or German).
+- Nutze die Vokale "ä", "ö" und "ü" für Deutsch.
