@@ -178,7 +178,7 @@ backup() {
     return 0
   fi
 
-  local src candidate n status=0 no_increment=0
+  local src candidate n exit_status=0 no_increment=0
   local -a sources=()
 
   while [ "$#" -gt 0 ]; do
@@ -228,12 +228,12 @@ backup() {
     # existence & type checks
     if [ ! -e "$src" ]; then
       printf 'bak: source not found: %s\n' "$src" >&2
-      status=1
+      exit_status=1
       continue
     fi
     if [ -d "$src" ]; then
       printf 'bak: source is a directory (not supported): %s\n' "$src" >&2
-      status=1
+      exit_status=1
       continue
     fi
 
@@ -245,7 +245,7 @@ backup() {
       if cp -a -- "$src" "$candidate"; then
         printf 'Backup created: %s\n' "$candidate"
       else
-        status=1
+        exit_status=1
       fi
       continue
     fi
@@ -263,7 +263,7 @@ backup() {
         if cp -a -- "$src" "$candidate"; then
           printf 'Backup created: %s\n' "$candidate"
         else
-          status=1
+          exit_status=1
         fi
         break
       fi
@@ -271,13 +271,13 @@ backup() {
       # safety cap to avoid infinite loop
       if [ "$n" -gt 10000 ]; then
         printf 'bak: failed to find free backup name after 10000 attempts: %s\n' "$src" >&2
-        status=3
+        exit_status=3
         break
       fi
     done
   done
 
-  return "$status"
+  return "$exit_status"
 }
 
 alias bak="backup" # for listing in 'alias'
