@@ -83,8 +83,46 @@ curl_with_newline() {
 alias curl="curl_with_newline"
 
 
-# Import Mapping messenger
-alias im_messenger="php bin/console messenger:consume async -vv"
+# npm
+npm_min_release_age_toggle() {
+    local npmrc="${HOME}/.npmrc"
+    local status
+    local tmp
+
+    if [ ! -f "$npmrc" ]; then
+        printf 'npmmrat: %s does not exist\n' "$npmrc" >&2
+        return 1
+    fi
+
+    tmp=$(mktemp "${TMPDIR:-/tmp}/npmmrat.XXXXXX") || return 1
+
+    if grep -Eq '^[[:space:]]*min-release-age[[:space:]]*=' "$npmrc"; then
+        if ! sed -E 's/^([[:space:]]*)(min-release-age[[:space:]]*=)/\1# \2/' "$npmrc" > "$tmp"; then
+            command rm -f "$tmp"
+            return 1
+        fi
+        status="Disabled"
+    elif grep -Eq '^[[:space:]]*[#;][[:space:]]*min-release-age[[:space:]]*=' "$npmrc"; then
+        if ! sed -E 's/^([[:space:]]*)[#;][[:space:]]*(min-release-age[[:space:]]*=)/\1\2/' "$npmrc" > "$tmp"; then
+            command rm -f "$tmp"
+            return 1
+        fi
+        status="Enabled"
+    else
+        command rm -f "$tmp"
+        printf 'npmmrat: min-release-age was not found in %s\n' "$npmrc" >&2
+        return 1
+    fi
+
+    if ! command cat "$tmp" > "$npmrc"; then
+        command rm -f "$tmp"
+        return 1
+    fi
+    command rm -f "$tmp"
+    printf '%s min-release-age in %s\n' "$status" "$npmrc"
+}
+
+alias npmmrat="npm_min_release_age_toggle"
 
 
 # go to /home/fabi/Programming/Projects/private/<project> (or to a named project if you pass an argument)
@@ -393,6 +431,8 @@ alias s_cv="source bin/activate" # activate in a current venv
 
 # OTHERS #
 # PHP
+## Import Mapping messenger
+alias im_messenger="php bin/console messenger:consume async -vv"
 alias php_cc="php bin/console cache:clear"
 
 # Python
