@@ -125,6 +125,88 @@ npm_min_release_age_toggle() {
 alias npmmrat="npm_min_release_age_toggle"
 
 
+# Codex
+# Toggle the custom notification hook that plays the task-completion sound.
+# The hook is configured in the user-level Codex config because Codex ignores
+# `notify` in project-local config files. Usage: codexbell
+codex_completion_sound_toggle() {
+    local codex_home="${CODEX_HOME:-${HOME}/.codex}"
+    local config="${codex_home}/config.toml"
+    local active_pattern='^[[:space:]]*notify[[:space:]]*=[[:space:]]*\[[[:space:]]*"[^"]*/own_settings/play-completion-sound\.sh"[[:space:]]*\][[:space:]]*$'
+    local disabled_pattern='^[[:space:]]*#[[:space:]]*notify[[:space:]]*=[[:space:]]*\[[[:space:]]*"[^"]*/own_settings/play-completion-sound\.sh"[[:space:]]*\][[:space:]]*$'
+    local active_count disabled_count mode status tmp
+
+    if [ ! -f "$config" ]; then
+        printf 'codexbell: %s does not exist\n' "$config" >&2
+        return 1
+    fi
+
+    # Replacing a symlink atomically would replace the link itself, so refuse
+    # it instead of unexpectedly changing how the config is managed.
+    if [ -L "$config" ]; then
+        printf 'codexbell: refusing to replace symlink: %s\n' "$config" >&2
+        return 1
+    fi
+
+    active_count=$(grep -Ec "$active_pattern" "$config" || true)
+    disabled_count=$(grep -Ec "$disabled_pattern" "$config" || true)
+
+    if [ "$active_count" -eq 1 ] && [ "$disabled_count" -eq 0 ]; then
+        mode="disable"
+        status="Disabled"
+    elif [ "$active_count" -eq 0 ] && [ "$disabled_count" -eq 1 ]; then
+        mode="enable"
+        status="Enabled"
+    else
+        printf 'codexbell: expected exactly one active or commented completion-sound hook in %s\n' "$config" >&2
+        return 1
+    fi
+
+    # Create the replacement beside config.toml so the final rename is atomic.
+    # mktemp also gives the new config restrictive permissions (0600).
+    tmp=$(mktemp "${config}.codexbell.XXXXXX") || return 1
+
+    if ! awk \
+        -v mode="$mode" \
+        -v active_pattern="$active_pattern" \
+        -v disabled_pattern="$disabled_pattern" '
+        {
+            if (mode == "disable" && $0 ~ active_pattern) {
+                indent = $0
+                sub(/[^[:space:]].*$/, "", indent)
+                line = $0
+                sub(/^[[:space:]]*/, "", line)
+                print indent "# " line
+                next
+            }
+
+            if (mode == "enable" && $0 ~ disabled_pattern) {
+                indent = $0
+                sub(/[^[:space:]].*$/, "", indent)
+                line = $0
+                sub(/^[[:space:]]*#[[:space:]]*/, "", line)
+                print indent line
+                next
+            }
+
+            print
+        }
+    ' "$config" > "$tmp"; then
+        command rm -f "$tmp"
+        return 1
+    fi
+
+    if ! command mv "$tmp" "$config"; then
+        command rm -f "$tmp"
+        return 1
+    fi
+
+    printf '%s Codex completion sound hook in %s\n' "$status" "$config"
+}
+
+alias codexbell="codex_completion_sound_toggle"
+
+
 # go to /home/fabi/Programming/Projects/private/<project> (or to a named project if you pass an argument)
 go_to_proj_root() {
   local project="$1"
