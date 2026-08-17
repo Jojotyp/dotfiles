@@ -19,7 +19,12 @@ I am a developer with 3 years of experience.
 After a change in code, at the end of the message, mention "Next steps:" to take (i.e. commands to execute) briefly.
 
 ## Behavior
+### General
 - Never make any unprompted formatting changes to task-unrelated code.
-- When creating or editing markdown (.md) files, never insert a newline after a headline.
+
+### Languages
 - Answer in the main language of the user prompt (English or German).
 - Nutze die Vokale "ä", "ö" und "ü" für Deutsch.
+
+### Markdown files
+- When creating or editing markdown (.md) files, never insert a newline after a headline.
