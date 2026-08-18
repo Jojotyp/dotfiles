@@ -84,17 +84,17 @@ alias curl="curl_with_newline"
 
 
 # npm
-npm_min_release_age_toggle() {
+_toggle_npm_min_release_age() {
     local npmrc="${HOME}/.npmrc"
     local status
     local tmp
 
     if [ ! -f "$npmrc" ]; then
-        printf 'npmmrat: %s does not exist\n' "$npmrc" >&2
+        printf 'toggle_npm_min_release_age: %s does not exist\n' "$npmrc" >&2
         return 1
     fi
 
-    tmp=$(mktemp "${TMPDIR:-/tmp}/npmmrat.XXXXXX") || return 1
+    tmp=$(mktemp "${TMPDIR:-/tmp}/toggle_npm_min_release_age.XXXXXX") || return 1
 
     if grep -Eq '^[[:space:]]*min-release-age[[:space:]]*=' "$npmrc"; then
         if ! sed -E 's/^([[:space:]]*)(min-release-age[[:space:]]*=)/\1# \2/' "$npmrc" > "$tmp"; then
@@ -110,7 +110,7 @@ npm_min_release_age_toggle() {
         status="Enabled"
     else
         command rm -f "$tmp"
-        printf 'npmmrat: min-release-age was not found in %s\n' "$npmrc" >&2
+        printf 'toggle_npm_min_release_age: min-release-age was not found in %s\n' "$npmrc" >&2
         return 1
     fi
 
@@ -122,14 +122,14 @@ npm_min_release_age_toggle() {
     printf '%s min-release-age in %s\n' "$status" "$npmrc"
 }
 
-alias npmmrat="npm_min_release_age_toggle"
+alias toggle_npm_min_release_age="_toggle_npm_min_release_age"
 
 
 # Codex
 # Toggle the custom notification hook that plays the task-completion sound.
 # The hook is configured in the user-level Codex config because Codex ignores
-# `notify` in project-local config files. Usage: codexbell
-codex_completion_sound_toggle() {
+# `notify` in project-local config files. Usage: toggle_codex_completion_sound
+_toggle_codex_completion_sound() {
     local codex_home="${CODEX_HOME:-${HOME}/.codex}"
     local config="${codex_home}/config.toml"
     local active_pattern='^[[:space:]]*notify[[:space:]]*=[[:space:]]*\[[[:space:]]*"[^"]*/own_settings/play-completion-sound\.sh"[[:space:]]*\][[:space:]]*$'
@@ -137,14 +137,14 @@ codex_completion_sound_toggle() {
     local active_count disabled_count mode status tmp
 
     if [ ! -f "$config" ]; then
-        printf 'codexbell: %s does not exist\n' "$config" >&2
+        printf 'toggle_codex_completion_sound: %s does not exist\n' "$config" >&2
         return 1
     fi
 
     # Replacing a symlink atomically would replace the link itself, so refuse
     # it instead of unexpectedly changing how the config is managed.
     if [ -L "$config" ]; then
-        printf 'codexbell: refusing to replace symlink: %s\n' "$config" >&2
+        printf 'toggle_codex_completion_sound: refusing to replace symlink: %s\n' "$config" >&2
         return 1
     fi
 
@@ -158,13 +158,13 @@ codex_completion_sound_toggle() {
         mode="enable"
         status="Enabled"
     else
-        printf 'codexbell: expected exactly one active or commented completion-sound hook in %s\n' "$config" >&2
+        printf 'toggle_codex_completion_sound: expected exactly one active or commented completion-sound hook in %s\n' "$config" >&2
         return 1
     fi
 
     # Create the replacement beside config.toml so the final rename is atomic.
     # mktemp also gives the new config restrictive permissions (0600).
-    tmp=$(mktemp "${config}.codexbell.XXXXXX") || return 1
+    tmp=$(mktemp "${config}.toggle_codex_completion_sound.XXXXXX") || return 1
 
     if ! awk \
         -v mode="$mode" \
@@ -204,7 +204,7 @@ codex_completion_sound_toggle() {
     printf '%s Codex completion sound hook in %s\n' "$status" "$config"
 }
 
-alias codexbell="codex_completion_sound_toggle"
+alias toggle_codex_completion_sound="_toggle_codex_completion_sound"
 
 
 # go to /home/fabi/Programming/Projects/private/<project> (or to a named project if you pass an argument)
