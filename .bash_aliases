@@ -86,7 +86,7 @@ alias curl="curl_with_newline"
 # npm
 _toggle_npm_min_release_age() {
     local npmrc="${HOME}/.npmrc"
-    local status
+    local toggle_status
     local tmp
 
     if [ ! -f "$npmrc" ]; then
@@ -101,13 +101,13 @@ _toggle_npm_min_release_age() {
             command rm -f "$tmp"
             return 1
         fi
-        status="Disabled"
+        toggle_status="Disabled"
     elif grep -Eq '^[[:space:]]*[#;][[:space:]]*min-release-age[[:space:]]*=' "$npmrc"; then
         if ! sed -E 's/^([[:space:]]*)[#;][[:space:]]*(min-release-age[[:space:]]*=)/\1\2/' "$npmrc" > "$tmp"; then
             command rm -f "$tmp"
             return 1
         fi
-        status="Enabled"
+        toggle_status="Enabled"
     else
         command rm -f "$tmp"
         printf 'toggle_npm_min_release_age: min-release-age was not found in %s\n' "$npmrc" >&2
@@ -119,7 +119,7 @@ _toggle_npm_min_release_age() {
         return 1
     fi
     command rm -f "$tmp"
-    printf '%s min-release-age in %s\n' "$status" "$npmrc"
+    printf '%s min-release-age in %s\n' "$toggle_status" "$npmrc"
 }
 
 alias toggle_npm_min_release_age="_toggle_npm_min_release_age"
@@ -513,6 +513,26 @@ alias s_cv="source bin/activate" # activate in a current venv
 
 # OTHERS #
 # PHP
+## Homebrew PHP versions
+if command -v brew >/dev/null 2>&1; then
+    for _php_alias_entry in \
+        "7.3:php@7.3" \
+        "7.4:php@7.4" \
+        "8.2:php@8.2" \
+        "8.3:php@8.3" \
+        "8.4:php@8.4" \
+        "8.5:php"; do
+        _php_alias_name="${_php_alias_entry%%:*}"
+        _php_formula="${_php_alias_entry#*:}"
+
+        if _php_prefix="$(brew --prefix "$_php_formula" 2>/dev/null)" \
+            && [ -x "$_php_prefix/bin/php" ]; then
+            alias "php${_php_alias_name}=$_php_prefix/bin/php"
+        fi
+    done
+    unset _php_alias_entry _php_alias_name _php_formula _php_prefix
+fi
+
 ## Import Mapping messenger
 alias im_messenger="php bin/console messenger:consume async -vv"
 alias php_cc="php bin/console cache:clear"
