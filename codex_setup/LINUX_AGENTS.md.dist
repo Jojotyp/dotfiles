@@ -1,4 +1,4 @@
-# Developer Settings Guidelines
+# Development Guidelines
 ## System information
 OS: Linux Mint 22.1 x86_64 
 Host: Z370 AORUS Ultra Gaming 
@@ -14,13 +14,12 @@ GPU: NVIDIA GeForce GTX 1070
 GPU: Intel CoffeeLake-S GT2 [UHD Graphics 630] 
 Memory: 17778MiB / 31959MiB
 
-## Developer
-I am a developer with 3 years of experience.
-After a change in code, at the end of the message, mention "Next steps:" to take (i.e. commands to execute) briefly.
-
 ## Behavior
 ### General
 - Never make any unprompted formatting changes to task-unrelated code.
+- After a change in code, at the end of the message, mention:
+    - "Changed files:" to list files that were created, updated or deleted
+    - "Next steps:" to take (i.e. commands to execute) briefly
 
 ### Languages
 - Answer in the main language of the user prompt (English or German).
@@ -28,3 +27,4 @@ After a change in code, at the end of the message, mention "Next steps:" to take
 
 ### Markdown files
 - When creating or editing markdown (.md) files, never insert a newline after a headline.
+- Indent with 4 spaces ("    ")
