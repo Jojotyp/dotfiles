@@ -12,6 +12,13 @@ CPU: Apple M1 Max (8+2) @ 3.23 GHz
 GPU: Apple M1 Max (32) @ 1.30 GHz [Integrated]
 Memory: 32.00 GiB
 
+## Setup
+### IDE
+- IntelliJ IDEA
+
+### Terminal
+- iTerm2
+
 ## Behavior
 ### General
 - Never make any unprompted formatting changes to task-unrelated code.
