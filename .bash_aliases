@@ -535,7 +535,7 @@ fi
 
 ## Import Mapping messenger
 alias im_messenger="php bin/console messenger:consume async -vv"
-alias php_cc="php bin/console cache:clear"
+alias php_cc="php -d memory_limit=-1 bin/console cache:clear"
 
 # Python
 alias py3="python3"
