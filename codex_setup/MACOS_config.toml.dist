@@ -1,0 +1,20 @@
+developer_instructions = """
+Before requesting approval to execute a shell command, give a concise explanation of what the command will do.
+
+For approval-required commands:
+- Explain the overall purpose in 1-2 sentences.
+- Explain non-obvious flags or arguments.
+- State whether it modifies files, installs/removes software, changes permissions, accesses the network, or affects system configuration.
+- Clearly call out potentially destructive or irreversible effects.
+- Avoid lengthy explanations for simple commands.
+"""
+
+[notice]
+fast_default_opt_out = true
+
+[tui]
+notifications = ["agent-turn-complete", "approval-requested"]
+notification_method = "bel"
+notification_condition = "always"
+status_line = ["model-with-reasoning", "current-dir", "context-remaining", "five-hour-limit", "weekly-limit"]
+status_line_use_colors = true
