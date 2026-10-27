@@ -478,18 +478,24 @@ alias Programming="cd $HOME/Programming"
 alias Screenshots="cd $HOME/Screenshots"
 alias Videos="cd $HOME/Videos"
 
+## setup
 alias dotfiles="cd $HOME/dotfiles"
 alias hints="cd $HOME/Programming/hints"
+
 alias me="cd $HOME/Documents/me"
+
 alias own_packages="cd $HOME/Programming/own_packages"
+
+## Programming: private
 alias private="cd $HOME/Programming/Projects/private"
 alias progr="cd $HOME/Programming"
 alias proj="cd $HOME/Programming/Projects"
 alias projv="cd /var/www/Projects"
 alias scripts="cd $HOME/Programming/scripts"
+alias skills="cd $HOME/Programming/Projects/private/skills"
 alias venvs="cd $HOME/Programming/venvs"
 
-## work
+## Programming: work
 alias customers="cd $HOME/Programming/Projects/work/customers"
 alias work="cd $HOME/Programming/Projects/work"
 alias work_idea="cd $HOME/Programming/Projects/work/IdeaProjects"
