@@ -25,7 +25,7 @@ Memory: 17778MiB / 31959MiB
 ### General
 - Never make any unprompted formatting changes to task-unrelated code.
 - After a change in code, at the end of the message, mention:
-    - "Changed files:" to list files that were created, updated or deleted
+    - "Changed files:" to list files that were created, updated or deleted all individually
     - "Next steps:" to take (i.e. commands to execute) briefly
 
 ### Languages
