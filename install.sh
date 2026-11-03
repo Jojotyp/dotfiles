@@ -100,8 +100,7 @@ fi
 
 echo ""
 
-# Optionally install the global Codex instructions from the template without
-# overwriting an existing personal configuration.
+# Optionally install or overwrite the global Codex instructions from the template.
 DIR_CODEX="${CODEX_HOME:-${HOME}/.codex}"
 codex_setup_available=1
 
@@ -116,26 +115,22 @@ if [ ! -d "${DIR_CODEX}" ]; then
 fi
 
 if [ "${codex_setup_available}" -eq 1 ]; then
-    read -r -p "Do you want to create global Codex instructions at ${DIR_CODEX}/AGENTS.md? [y/N] " response
+    read -r -p "Do you want to install or overwrite global Codex instructions at ${DIR_CODEX}/AGENTS.md? [y/N] " response
     if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
-        if [ ! -s "${DIR_CODEX}/AGENTS.md" ]; then
-            if [ "$(uname -s)" = "Linux" ]; then
-                codex_agents_template="LINUX_AGENTS.md.dist"
-            elif [ "$(uname -s)" = "Darwin" ]; then
-                codex_agents_template="MACOS_AGENTS.md.dist"
-            else
-                codex_agents_template=""
-                echo "Unsupported operating system. Skipping global Codex instructions setup."
-            fi
-            if [ -n "${codex_agents_template}" ]; then
-                cp "${DIR_DOTFILES}/codex_setup/${codex_agents_template}" "${DIR_CODEX}/AGENTS.md"
-                echo "Installed Codex instructions at ${DIR_CODEX}/AGENTS.md"
-            fi
+        if [ "$(uname -s)" = "Linux" ]; then
+            codex_agents_template="LINUX_AGENTS.md.dist"
+        elif [ "$(uname -s)" = "Darwin" ]; then
+            codex_agents_template="MACOS_AGENTS.md.dist"
         else
-            echo "NOT installing! Keeping already existing Codex instructions at ${DIR_CODEX}/AGENTS.md"
+            codex_agents_template=""
+            echo "Unsupported operating system. Skipping global Codex instructions setup."
+        fi
+        if [ -n "${codex_agents_template}" ]; then
+            cp "${DIR_DOTFILES}/codex_setup/${codex_agents_template}" "${DIR_CODEX}/AGENTS.md"
+            echo "Installed Codex instructions at ${DIR_CODEX}/AGENTS.md"
         fi
     else
-        echo "Will not create global Codex instructions."
+        echo "Will not install or overwrite global Codex instructions."
     fi
 else
     echo "Skipping global Codex instructions setup."
